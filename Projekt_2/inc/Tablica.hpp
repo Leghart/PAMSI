@@ -3,7 +3,6 @@
 #include <cstdlib>
 #include <fstream>
 using namespace std;
-//srand(time(NULL));
 
 class Tablica{
   int* tab_0; //tab oryginalna
@@ -14,8 +13,9 @@ class Tablica{
   int* tab_pom; //do merga
   int rozmiar;
 public:
-  Tablica(int r); //randomowe liczby
+  //  Tablica(int r); //randomowe liczby
   Tablica(int r, istream& uchwyt); //czyta liczby z pliku
+  Tablica(int r,int b); //zlozony konstruktor posort tab
   ~Tablica();
 
   /** Funkcje pomocnicze **/
@@ -32,20 +32,63 @@ public:
   void Wyslij(ostream& out,int k);
 };
 
-
-Tablica::Tablica(int r){
+/*
+  1-full random
+  2-posortowane w dobrej kolej
+  3-posortowane w odwrotnej kolej
+  4-te same wartosci
+*/
+Tablica::Tablica(int r,int b){
   rozmiar=r;
   tab_0=new int[rozmiar];
   tab_1=new int[rozmiar];
   tab_2=new int[rozmiar];
   tab_3=new int[rozmiar];
   tab_pom=new int[rozmiar];
-  for(int i=0;i<rozmiar;i++){
-    tab_0[i]=rand()%rozmiar;
-    tab_1[i]=tab_0[i];
-    tab_2[i]=tab_0[i];
-    tab_3[i]=tab_0[i];
-    tab_pom[i]=0;
+  switch(b){
+  case 1:{
+    for(int i=0;i<rozmiar;i++){
+      tab_0[i]=rand()%rozmiar;
+      tab_1[i]=tab_0[i];
+      tab_2[i]=tab_0[i];
+      tab_3[i]=tab_0[i];
+      tab_pom[i]=0;
+    }
+    break;
+  }
+  case 2:{
+    for(int i=0;i<rozmiar;i++){
+      tab_0[i]=i;
+      tab_1[i]=tab_0[i];
+      tab_2[i]=tab_0[i];
+      tab_3[i]=tab_0[i];
+      tab_pom[i]=0;
+    }
+    break;
+  }
+  case 3:{
+    int wyn=rozmiar-1;
+    for(int i=0;i<rozmiar;i++){
+      tab_0[i]=wyn;
+      tab_1[i]=tab_0[i];
+      tab_2[i]=tab_0[i];
+      tab_3[i]=tab_0[i];
+      tab_pom[i]=0;
+      wyn--;
+    }
+    break;
+  }
+  case 4:{
+    int pom=rand()%rozmiar;
+    for(int i=0;i<rozmiar;i++){
+      tab_0[i]=pom;
+      tab_1[i]=tab_0[i];
+      tab_2[i]=tab_0[i];
+      tab_3[i]=tab_0[i];
+      tab_pom[i]=0;
+    }
+  }
+    break;
   }
 }
 
@@ -74,6 +117,13 @@ Tablica::Tablica(int r,istream& uchwyt){
 
 
 Tablica::~Tablica(){
+  for(int i=0;i<rozmiar;i++){
+    tab_0[i]=0;
+    tab_1[i]=0;
+    tab_2[i]=0;
+    tab_3[i]=0;
+    tab_pom[i]=0;
+  }
   delete[] tab_0;
   delete[] tab_1;
   delete[] tab_2;
@@ -130,16 +180,16 @@ void Tablica::Wyswietl(int k){
 }
 
 
-void Tablica::scal(int l, int s, int p){
-  int i = l;
-  int j = s + 1;
+void Tablica::scal(int lewy, int pivot, int prawy){
+  int i = lewy;
+  int j = pivot + 1;
 
-  for(int i = l;i<=p; i++)
+  for(int i = lewy;i<=prawy; i++)
     tab_pom[i] = tab_3[i];
 
-  for(int k=l;k<=p;k++) 
-    if(i<=s)
-      if(j <= p)
+  for(int k=lewy;k<=prawy;k++) 
+    if(i<=pivot)
+      if(j <= prawy)
         if(tab_pom[j]<tab_pom[i])
           tab_3[k] = tab_pom[j++];
         else
@@ -154,26 +204,27 @@ void Tablica::scal(int l, int s, int p){
 
 
 /** Funkcje sortujace **/
-void Tablica::Quick(int l,int p){
-  int i = l;
-  int j = p;
-  int x = tab_1[(l+p)/2];
-  do{
-    while(tab_1[i]<x)
-      i++;
-    while(tab_1[j]>x)
-      j--;
+void Tablica::Quick(int lewy,int prawy){
+  int i = lewy;
+  int j = prawy;
+  int pivot = tab_1[(lewy+prawy)/2];
+  //  int x=tab_1[l];
+
+
+  while(i<=j){ 
+    while(tab_1[i]<pivot) i++;
+    while(tab_1[j]>pivot) j--;
     if(i<=j){
       swap(tab_1[i],tab_1[j]);
       i++;
       j--;
     }
-  } while(i<=j);
+  }
 
-  if(l<j)
-    Quick(l,j);
-  if(p>i)
-    Quick(i,p);
+  if(lewy<j)
+    Quick(lewy,j);
+  if(i<prawy)
+    Quick(i,prawy);
 }
 
 
@@ -188,14 +239,14 @@ void Tablica::Babel(){
 }
 
 
-void Tablica::Merge(int l,int p){
-  if (p<=l)
+void Tablica::Merge(int lewy,int prawy){
+  if (prawy<=lewy)
     return;
 
-  int s=(p+l)/2;
-  Merge(l,s);
-  Merge(s+1,p);
-  scal(l,s,p);
+  int pivot=(prawy+lewy)/2;
+  Merge(lewy,pivot);
+  Merge(pivot+1,prawy);
+  scal(lewy,pivot,prawy);
 }
 
 
@@ -234,8 +285,8 @@ double Czas_Quick(Tablica& t){
 
   t.Quick(0,t.Zw_roz()-1);
 
-  //  koniec=clock();
-  roznica=(clock()-start)/(double)CLOCKS_PER_SEC;
+  koniec=clock();
+  roznica=(koniec-start)/(double)CLOCKS_PER_SEC;
   cout.precision(5);
   ofstream plik_o("output_Q.txt");
   t.Wyslij(plik_o,1);

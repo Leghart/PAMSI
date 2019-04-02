@@ -9,88 +9,72 @@
 using namespace std;
 
 /*
-  1-Quick
+  1-Quick_opty
   2-Babel
   3-Merge
+  4-Quick_pesy
 */
 void Testuj(int rozmiar,int jaki){
-  int ile=10;
-  double tab[ile];
-  double pom=0,top=0,back=0;
   fstream plik_t;
+  double pom;
+  Tablica T(rozmiar,1);
   plik_t.open("times.txt",ios::app);
   switch(jaki){
   case 1:
     plik_t<<"Quick: "<<"Ilosc danych:"<<rozmiar<<endl;
-    for(int i=0;i<ile;i++){
-      Tablica T(rozmiar);
-      pom=Czas_Quick(T);
-      tab[i]=pom;
-      //      T.Wyswietl(0);  // sa rozne wartosci
-      //      cout<<"**********\n";
-    }
-    sort(tab,tab+ile);
-    top=tab[ile-1];
-    back=tab[0];
-    plik_t<<"Czas optymistyczny: "<<back<<endl;
-    plik_t<<"Czas pesymistyczny: "<<top<<endl;
-    plik_t<<"Czas sredni: "<<(top+back)/2<<endl<<endl;
+    pom=Czas_Quick(T);
+    plik_t<<"Czas: "<<pom<<" s"<<endl<<endl;
     break;
   case 2:
     plik_t<<"Babelkowe: "<<"Ilosc danych:"<<rozmiar<<endl;
-    for(int i=0;i<ile;i++){
-      Tablica T(rozmiar);
-      pom=Czas_Babel(T);
-      tab[i]=pom;
-    }
-    sort(tab,tab+ile);
-    top=tab[ile-1];
-    back=tab[0];
-    plik_t<<"Czas optymistyczny: "<<back<<endl;
-    plik_t<<"Czas pesymistyczny: "<<top<<endl;
-    plik_t<<"Czas sredni: "<<(top+back)/2<<endl<<endl;
+    pom=Czas_Babel(T);
+    plik_t<<"Czas: "<<pom<<" s"<<endl<<endl;
     break;
   case 3:
     plik_t<<"Merge: "<<"Ilosc danych:"<<rozmiar<<endl;
-    for(int i=0;i<ile;i++){
-      Tablica T(rozmiar);
-      pom=Czas_Merge(T);
-      tab[i]=pom;
-    }
-    sort(tab,tab+ile);
-    top=tab[ile-1];
-    back=tab[0];
-    plik_t<<"Czas optymistyczny: "<<back<<endl;
-    plik_t<<"Czas pesymistyczny: "<<top<<endl;
-    plik_t<<"Czas sredni: "<<(top+back)/2<<endl<<endl;
+    pom=Czas_Merge(T);
+    plik_t<<"Czas: "<<pom<<" s"<<endl<<endl;
+    break;
+  case 4:
+    plik_t<<"Quick_p: "<<"Ilosc danych:"<<rozmiar<<endl;
+    Tablica spec(rozmiar,2);//2
+    pom=Czas_Quick(spec);
+    plik_t<<"Czas: "<<pom<<" s"<<endl<<endl;
     break;
   }
 }
 
 
 
-
-
 int main(){
   srand(time(NULL));
 
+  Testuj(100,1);
+  Testuj(100,2);
+  Testuj(100,3);
+  Testuj(100,4);
+
+
+  Testuj(1000,1);
+  Testuj(1000,2);
+  Testuj(1000,3);
+  Testuj(1000,4);
 
   Testuj(10000,1);
-  Testuj(10000,1);
-  Testuj(10000,1);
+  Testuj(10000,2);
   Testuj(10000,3);
-  Testuj(10000,3);
-  Testuj(10000,3);
-  //  Testuj(1000000,1);
-  //  Testuj(1000000,1);
-  //  Testuj(1000,2);
-  //  Testuj(10000,3);
-
-  //  Tablica t1(10000000);
-  //  cout<<Czas_Quick(t1)<<endl;
+  Testuj(10000,4);
 
 
+  Testuj(100000,1);
+  Testuj(100000,2);
+  Testuj(100000,3);
+  Testuj(100000,4);
 
+  Testuj(1000000,1);
+  Testuj(1000000,2);
+  Testuj(1000000,3);
+  Testuj(1000000,4);
 
 }
 
