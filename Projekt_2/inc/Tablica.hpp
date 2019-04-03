@@ -190,14 +190,22 @@ void Tablica::scal(int lewy, int pivot, int prawy){
   for(int k=lewy;k<=prawy;k++) 
     if(i<=pivot)
       if(j <= prawy)
-        if(tab_pom[j]<tab_pom[i])
-          tab_3[k] = tab_pom[j++];
-        else
-          tab_3[k] = tab_pom[i++];
-      else
-        tab_3[k] = tab_pom[i++];
-    else
-      tab_3[k] = tab_pom[j++];
+        if(tab_pom[j]<tab_pom[i]){
+          tab_3[k] = tab_pom[j];
+          j++;
+        }
+        else{
+          tab_3[k] = tab_pom[i];
+          i++;
+        }
+      else{
+        tab_3[k] = tab_pom[i];
+        i++;
+      }
+    else{
+      tab_3[k] = tab_pom[j];
+      j++;
+    }
 }
 
 
