@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.489
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Grafy", "Grafy\Grafy.vcxproj", "{E4314C62-B9B0-4497-A81B-7BE25970E115}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{12AD23DC-3507-4851-BF40-236D6BC29522}"
+	ProjectSection(SolutionItems) = preProject
+		Performance1.psess = Performance1.psess
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E4314C62-B9B0-4497-A81B-7BE25970E115}.Debug|x64.ActiveCfg = Debug|x64
+		{E4314C62-B9B0-4497-A81B-7BE25970E115}.Debug|x64.Build.0 = Debug|x64
+		{E4314C62-B9B0-4497-A81B-7BE25970E115}.Debug|x86.ActiveCfg = Debug|Win32
+		{E4314C62-B9B0-4497-A81B-7BE25970E115}.Debug|x86.Build.0 = Debug|Win32
+		{E4314C62-B9B0-4497-A81B-7BE25970E115}.Release|x64.ActiveCfg = Release|x64
+		{E4314C62-B9B0-4497-A81B-7BE25970E115}.Release|x64.Build.0 = Release|x64
+		{E4314C62-B9B0-4497-A81B-7BE25970E115}.Release|x86.ActiveCfg = Release|Win32
+		{E4314C62-B9B0-4497-A81B-7BE25970E115}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8EE2BC2A-7EA3-47AB-8331-FE3F542FCDC2}
+	EndGlobalSection
+EndGlobal
