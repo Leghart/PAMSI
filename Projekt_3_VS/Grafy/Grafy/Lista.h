@@ -6,48 +6,23 @@ using namespace std;
 class Lista {
 public:
 	Lista **A; //tablica
-	int **Tablica_Flag;
-	Lista * next;
+	int **Tablica_Flag; 
+	Lista * next; //wsk na kolejny element
 	int W,K,V;  //ilosc wierzcholkow, ilosc krawedzi, aktualnie wybrany wierzcholek 
 	int waga;
-	int rozmiar;
-	Lista *p, *r; //wsk, remove
+	Lista *p, *r; //wsk, usuniecie 
 
 	//do algorytmow
 	int *koszt;
 	int *numer;
 	bool *spt;
 
-	//metody
-	//~Lista();
 	void Usun_Liste();  
 	void Tworz_losowo(int, float);
-	int Rozmiar(int);
 	void Tworz_recznie(int, float);
 };
-/*
-Lista::~Lista() {
-	for (int i = 0; i < W; i++) {
-		p = A[i];
-		while (p) {
-			r = p;
-			p = p->next;
-			delete r;
-		}
-	}
-	delete[] A;
-}
-*/
-int Lista::Rozmiar(int WSt){
-	p = A[WSt];
-	rozmiar = 0;
-	while (p){
-		rozmiar++;
-		p = p->next;
-	}
-	return rozmiar;
-}
 
+//glowna funkcja tworzaca polaczenia
 void Lista::Tworz_losowo(int Wierzcholki, float G){
 	int v1, v2;
 	W = Wierzcholki;
@@ -114,6 +89,7 @@ void Lista::Tworz_losowo(int Wierzcholki, float G){
 	}
 }
 
+//do testow polaczen
 void Lista::Tworz_recznie(int Wierzcholki, float G) {
 	int v1, v2,x;
 	W = Wierzcholki;
@@ -136,6 +112,7 @@ void Lista::Tworz_recznie(int Wierzcholki, float G) {
 	cout << endl;
 }
 
+//wyswietlanie
 ostream& operator << (ostream& wyjscie, Lista& L) {
 	for (int i = 0; i < L.W; i++) {
 		cout << "A[" << i << "] =";
@@ -149,6 +126,7 @@ ostream& operator << (ostream& wyjscie, Lista& L) {
 	return wyjscie;
 }
 
+// usuwanie pamieci
 void Lista::Usun_Liste(){
 	for (int i = 0; i < W; i++){
 		delete[] Tablica_Flag[i];
@@ -159,14 +137,19 @@ void Lista::Usun_Liste(){
 			delete r;
 		}
 	}
-	delete[] Tablica_Flag;
 	delete[] A;
-	//delete[] koszt;
-	//delete[] numer;
+	delete[] Tablica_Flag;
+
+	/*
+	for (int i = 0; i < W; i++)
+		delete[] Tablica_Flag[i];
+	delete[] Tablica_Flag;
+	*/
 }
 
 
-// BELLMAN FORD
+// ----------------------------- BELLMAN FORD -------------------------------------------
+//glowny algorytm
 bool BellmanFord_alg(Lista& L,int v=0) {
 	Lista *pv;
 
@@ -194,6 +177,7 @@ bool BellmanFord_alg(Lista& L,int v=0) {
 	return true;
 }
 
+//wyswietlanie (nie uzywane w testowaniu)
 void BellmanFord(Lista& L) {
 	int *S;
 	if (BellmanFord_alg(L)) {
@@ -214,6 +198,7 @@ void BellmanFord(Lista& L) {
 		cout << "Ujemny cykl" << endl;
 }
 
+//pomiar czasu algorytmu
 float Czas_Bellman(Lista& L) {
 	clock_t start, stop;
 	float czas;
@@ -231,7 +216,8 @@ float Czas_Bellman(Lista& L) {
 
 
 
-//------------------------------- DIJKSTRA ------------------------------
+//------------------------------- DIJKSTRA ---------------------------------------------------
+//zwraca najkrotsze polaczenie
 int minDyst(Lista& L) {
 	int min = INF, min_index;
 	for (int i = 0; i < L.W; i++) {
@@ -243,6 +229,7 @@ int minDyst(Lista& L) {
 	return min_index;
 }
 
+//wyswietla (nie uzywane w testach)
 void Wyswietl(Lista& L) {
 	int *S;
 	S = new int[L.W];
@@ -259,6 +246,7 @@ void Wyswietl(Lista& L) {
 	delete[]S;
 }
 
+//glowny algorytm
 void Dijkstra(Lista& L, int wierzch_start = 0) {
 	L.koszt = new int[L.W];
 	L.numer = new int[L.W];
@@ -286,6 +274,7 @@ void Dijkstra(Lista& L, int wierzch_start = 0) {
 	delete L.numer;
 }
 
+//liczy czas od rozpoczenia Dijkstry do jego zakonczenia
 float Czas_Dijkstra(Lista& L) {
 	clock_t start, stop;
 	float czas;

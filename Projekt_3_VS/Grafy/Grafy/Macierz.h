@@ -6,7 +6,7 @@ using namespace std;
 class Macierz{
 	int W,K,G; //wierzcholki krawedzie gestosc
 public:
-	int **tablica;
+	int **tablica; //macierz
 
 	//do algorytmow
 	int *koszt; //suma najkrotszych drog
@@ -18,10 +18,10 @@ public:
 	int Zwroc_Wierz(){return W;}
 	int Zwroc_Kraw(){return K;}
 	void Polacz_losowo();
-	void Polacz_recznie();
+	void Polacz_recznie(); //do testow 
 };
 
-
+//rezerwuje pamiec i zeruje elementy macierzy
 Macierz::Macierz(int w, float g){
 	W = w;
 	K = (int)(g*W*(W - 1)) / 200;
@@ -29,16 +29,16 @@ Macierz::Macierz(int w, float g){
 
 	tablica = new int *[W];
 	
-	for (int i = 0; i < W; i++) {
+	for (int i = 0; i < W; i++) 
 		tablica[i] = new int[W];
-	}
-	
+
 
 	for (int i = 0; i < W; i++)
 		for (int j = 0; j < W; j++)
 			tablica[i][j] = 0;
 }
 
+//niszczy element
 Macierz::~Macierz() {
 	for (int i = 0; i < W; i++) {
 		delete[] tablica[i];
@@ -46,6 +46,7 @@ Macierz::~Macierz() {
 	delete[] tablica;
 }
 
+// laczy elementy z max waga 10 i tylko na macierzy trojatnej
 void Macierz::Polacz_losowo() {
 	int pom = K;
 
@@ -74,6 +75,7 @@ void Macierz::Polacz_losowo() {
 	}
 }
 
+//do sprawdzania czy dobrze laczy elementy
 void Macierz::Polacz_recznie(){
 	int v1, v2,x;
 	cout << "Ilosc krawdzi: "<<K<<endl;
@@ -83,6 +85,7 @@ void Macierz::Polacz_recznie(){
 	}
 }
 
+//wyswietlenie macierzy
 ostream& operator << (ostream& wyjscie, Macierz& M) {
 	wyjscie << endl << "    ";
 	for (int i = 0; i < M.Zwroc_Wierz(); i++)
@@ -105,7 +108,7 @@ ostream& operator << (ostream& wyjscie, Macierz& M) {
 
 
 //------------------------	BELLMAN FORD --------------------------------
-
+//glowny algorytm liczenia drogi (wykorzystany w pomiarze czasu)
 bool BellmanFord_alg(Macierz& M, int wierzch_start=0) {
 	M.koszt = new int[M.Zwroc_Wierz()];    
 	M.numer = new int[M.Zwroc_Wierz()];    
@@ -131,6 +134,7 @@ bool BellmanFord_alg(Macierz& M, int wierzch_start=0) {
 	return true;
 }
 
+// do wyswietlenia kosztow drog i przez jakie elementy idzie
 void BellmanFord(Macierz& M) {	
 	int *S;
 	if (BellmanFord_alg(M)) {
@@ -153,6 +157,7 @@ void BellmanFord(Macierz& M) {
 	delete M.numer;	
 }
 
+//liczy czas od rozoczecia BellmanDord_alg do jego konca
 float Czas_Bellman(Macierz& M) {
 	clock_t start, stop;
 	float czas;
@@ -170,7 +175,7 @@ float Czas_Bellman(Macierz& M) {
 
 
 //-----------------------	DIJKSTRA ---------------------------------------
-
+//zwraca najkrotsze polaczenie
 int minDyst(Macierz& M){
 	int min = INF,min_index;
 	for (int i = 0; i < M.Zwroc_Wierz(); i++) {
@@ -182,6 +187,7 @@ int minDyst(Macierz& M){
 	return min_index;
 }
 
+//wyswietla (nie uzywane w testach)
 void Wyswietl(Macierz& M) {
 	int *S;
 	S = new int[M.Zwroc_Wierz()];
@@ -199,6 +205,7 @@ void Wyswietl(Macierz& M) {
 	delete[] S;
 }
 
+//glowny algorytm
 void Dijkstra(Macierz& M, int wierzch_start = 0) {
 	M.koszt = new int[M.Zwroc_Wierz()];
 	M.numer = new int[M.Zwroc_Wierz()];
@@ -225,6 +232,7 @@ void Dijkstra(Macierz& M, int wierzch_start = 0) {
 	delete M.numer;
 }
 
+//liczy czas od rozpoczenia Dijkstry do jego zakonczenia
 float Czas_Dijkstra(Macierz& M) {
 	clock_t start, stop;
 	float czas;

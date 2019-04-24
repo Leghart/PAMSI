@@ -3,37 +3,38 @@
 #include "Lista.h"
 using namespace std;
 
-
+//Funkcja testujaca algorytm DIjkstry dla listy i macierzy
 void Testuj_D(int n, float p) {
-	const int roz = 100;
-	float tab_czas[roz];
-/*
+	int roz = 100;
+	float *tab_czas=new float[roz];
+	
+	cout << "Lista" << endl;
+	for (int i = 0; i < roz; i++) {
+		Lista L;
+		L.Tworz_losowo(n, p);
+		tab_czas[i] = Czas_Dijkstra(L);
+		L.Usun_Liste();
+	}
+	sort(tab_czas, tab_czas + roz);
+	cout << "(D) W: " << n << " Gestosc: " << p << " Mean time: " << tab_czas[roz / 2] << endl;
+
 	cout<<"Macierz"<<endl;
 	for (int i = 0; i < roz; i++) {
 		Macierz M(n, p);
 		M.Polacz_losowo();
 		tab_czas[i] = Czas_Dijkstra(M);
+		//tu sie wywoluje destruktor
 	}
 	sort(tab_czas, tab_czas + roz);
 	cout << "(D) W: " << n << " Gestosc: " << p << " Mean czas: " << tab_czas[roz/2] << endl;
-	*/
-	
-	cout<<"Lista"<<endl;
-	for (int i = 0; i < roz; i++) {
-		Lista L;
-		L.Tworz_losowo(n,p);
-		tab_czas[i] = Czas_Dijkstra(L);
-		L.Usun_Liste();
-	}
-	sort(tab_czas, tab_czas + roz);
-	cout << "(D) W: " << n << " Gestosc: " << p << " Mean czas: " << tab_czas[roz / 2] << endl;
-	
+	delete[] tab_czas;
 }
 
+//Funkcja testujaca algorytm BellmanaForda dla listy i macierzy
 void Testuj_BF(int n, float p) {
-	const int roz = 100;
-	double tab_czas[roz];
-	
+	 int roz = 100;
+	float *tab_czas = new float[roz];
+
 	cout<<"Lista"<<endl;
 	for (int i = 0; i < roz; i++) {
 		Lista L;
@@ -42,24 +43,24 @@ void Testuj_BF(int n, float p) {
 		L.Usun_Liste();
 	}
 	sort(tab_czas, tab_czas + roz);
-	cout << "(BF) W: " << n << " Gestosc: " << p << " Mean czas: " << tab_czas[roz/2] << endl;
+	cout << "(BF) W: " << n << " Gestosc: " << p << " Mean time: " << tab_czas[roz/2] << endl;
 	
-	
-	/*
 	cout<<"Macierz"<<endl;
 	for (int i = 0; i < roz; i++) {
 		Macierz M(n, p);
 		M.Polacz_losowo();
 		tab_czas[i] = Czas_Bellman(M);
+		//tu sie wywoluje destruktor
 	}
 	sort(tab_czas, tab_czas + roz);
 	cout << "(BF) W: " << n << " Gestosc: " << p << " Mean czas: " << tab_czas[roz/2] << endl;
-	*/
+	delete[] tab_czas;
 }
 
 
 int main() {
 	srand(time(NULL));
+	//Glowna funkcja robiaca testy
 	/*
 	int gestosc=25;
 	int tab[5] = { 10,50,100,200,500 };
@@ -75,10 +76,8 @@ int main() {
 	}
 	*/
 
-	//Testuj_D(1000, 100);
-	Testuj_BF(1000, 100);
-
-
+	Testuj_D(5000, 100);
+	//Testuj_BF(100, 100);
 
 	return 0;
 }
