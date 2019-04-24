@@ -13,18 +13,31 @@ public:
 	int rozmiar;
 	Lista *p, *r; //wsk, remove
 
-	//do bellmana
+	//do algorytmow
 	int *koszt;
 	int *numer;
 	bool *spt;
 
 	//metody
+	//~Lista();
 	void Usun_Liste();  
 	void Tworz_losowo(int, float);
 	int Rozmiar(int);
 	void Tworz_recznie(int, float);
 };
-
+/*
+Lista::~Lista() {
+	for (int i = 0; i < W; i++) {
+		p = A[i];
+		while (p) {
+			r = p;
+			p = p->next;
+			delete r;
+		}
+	}
+	delete[] A;
+}
+*/
 int Lista::Rozmiar(int WSt){
 	p = A[WSt];
 	rozmiar = 0;
@@ -123,8 +136,6 @@ void Lista::Tworz_recznie(int Wierzcholki, float G) {
 	cout << endl;
 }
 
-
-
 ostream& operator << (ostream& wyjscie, Lista& L) {
 	for (int i = 0; i < L.W; i++) {
 		cout << "A[" << i << "] =";
@@ -140,6 +151,7 @@ ostream& operator << (ostream& wyjscie, Lista& L) {
 
 void Lista::Usun_Liste(){
 	for (int i = 0; i < W; i++){
+		delete[] Tablica_Flag[i];
 		p = A[i];
 		while (p){
 			r = p;
@@ -147,8 +159,12 @@ void Lista::Usun_Liste(){
 			delete r;
 		}
 	}
+	delete[] Tablica_Flag;
 	delete[] A;
+	//delete[] koszt;
+	//delete[] numer;
 }
+
 
 // BELLMAN FORD
 bool BellmanFord_alg(Lista& L,int v=0) {
@@ -215,7 +231,7 @@ float Czas_Bellman(Lista& L) {
 
 
 
-//DIJKSTRA
+//------------------------------- DIJKSTRA ------------------------------
 int minDyst(Lista& L) {
 	int min = INF, min_index;
 	for (int i = 0; i < L.W; i++) {
@@ -241,9 +257,6 @@ void Wyswietl(Lista& L) {
 		cout << "$" << L.koszt[i] << endl;
 	}
 	delete[]S;
-	delete L.koszt;
-	delete L.numer;
-
 }
 
 void Dijkstra(Lista& L, int wierzch_start = 0) {
@@ -269,6 +282,8 @@ void Dijkstra(Lista& L, int wierzch_start = 0) {
 		}
 	}
 	//Wyswietl(L);
+	delete L.koszt;
+	delete L.numer;
 }
 
 float Czas_Dijkstra(Lista& L) {

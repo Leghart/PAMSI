@@ -7,18 +7,17 @@ using namespace std;
 void Testuj_D(int n, float p) {
 	const int roz = 100;
 	float tab_czas[roz];
-
+/*
 	cout<<"Macierz"<<endl;
 	for (int i = 0; i < roz; i++) {
 		Macierz M(n, p);
 		M.Polacz_losowo();
 		tab_czas[i] = Czas_Dijkstra(M);
-	//	M.Usun(); //pokazuje blad
 	}
 	sort(tab_czas, tab_czas + roz);
 	cout << "(D) W: " << n << " Gestosc: " << p << " Mean czas: " << tab_czas[roz/2] << endl;
-
-	/*
+	*/
+	
 	cout<<"Lista"<<endl;
 	for (int i = 0; i < roz; i++) {
 		Lista L;
@@ -28,13 +27,13 @@ void Testuj_D(int n, float p) {
 	}
 	sort(tab_czas, tab_czas + roz);
 	cout << "(D) W: " << n << " Gestosc: " << p << " Mean czas: " << tab_czas[roz / 2] << endl;
-	*/
+	
 }
 
 void Testuj_BF(int n, float p) {
 	const int roz = 100;
 	double tab_czas[roz];
-	/*
+	
 	cout<<"Lista"<<endl;
 	for (int i = 0; i < roz; i++) {
 		Lista L;
@@ -45,17 +44,17 @@ void Testuj_BF(int n, float p) {
 	sort(tab_czas, tab_czas + roz);
 	cout << "(BF) W: " << n << " Gestosc: " << p << " Mean czas: " << tab_czas[roz/2] << endl;
 	
-	*/
 	
+	/*
 	cout<<"Macierz"<<endl;
 	for (int i = 0; i < roz; i++) {
 		Macierz M(n, p);
 		M.Polacz_losowo();
 		tab_czas[i] = Czas_Bellman(M);
-		M.Usun();  
 	}
 	sort(tab_czas, tab_czas + roz);
 	cout << "(BF) W: " << n << " Gestosc: " << p << " Mean czas: " << tab_czas[roz/2] << endl;
+	*/
 }
 
 
@@ -76,17 +75,9 @@ int main() {
 	}
 	*/
 
-//	Testuj_BF(100, 75);
+	//Testuj_D(1000, 100);
+	Testuj_BF(1000, 100);
 
-
-	//Testuj_D(100, 50);
-	Macierz M(10, 80);
-	M.Polacz_losowo();
-	cout << M << endl;
-	Dijkstra(M);
-	cout << endl;
-	cout << M << endl;
-	BellmanFord(M);
 
 
 	return 0;

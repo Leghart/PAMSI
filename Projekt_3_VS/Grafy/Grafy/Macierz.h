@@ -8,18 +8,17 @@ class Macierz{
 public:
 	int **tablica;
 
+	//do algorytmow
+	int *koszt; //suma najkrotszych drog
+	int *numer; //do numerowania przez jakie drogi sie idzie
+	bool *spt;
+
 	Macierz(int, float);
+	~Macierz();
 	int Zwroc_Wierz(){return W;}
 	int Zwroc_Kraw(){return K;}
 	void Polacz_losowo();
 	void Polacz_recznie();
-	void Usun();
-	
-	int *koszt; //suma najkrotszych drog
-	int *numer; //do numerowania przez jakie drogi sie idzie
-
-	//do dijkstry
-	bool *spt;
 };
 
 
@@ -38,6 +37,13 @@ Macierz::Macierz(int w, float g){
 	for (int i = 0; i < W; i++)
 		for (int j = 0; j < W; j++)
 			tablica[i][j] = 0;
+}
+
+Macierz::~Macierz() {
+	for (int i = 0; i < W; i++) {
+		delete[] tablica[i];
+	}
+	delete[] tablica;
 }
 
 void Macierz::Polacz_losowo() {
@@ -77,13 +83,6 @@ void Macierz::Polacz_recznie(){
 	}
 }
 
-void Macierz::Usun(){
-	for (int i = 0; i < W; i++) {
-		delete[] tablica[i];
-	}
-	delete[] tablica;
-}
-
 ostream& operator << (ostream& wyjscie, Macierz& M) {
 	wyjscie << endl << "    ";
 	for (int i = 0; i < M.Zwroc_Wierz(); i++)
@@ -104,9 +103,9 @@ ostream& operator << (ostream& wyjscie, Macierz& M) {
 	return wyjscie;
 }
 
-/*
-	BELLMAN FORD
-*/
+
+//------------------------	BELLMAN FORD --------------------------------
+
 bool BellmanFord_alg(Macierz& M, int wierzch_start=0) {
 	M.koszt = new int[M.Zwroc_Wierz()];    
 	M.numer = new int[M.Zwroc_Wierz()];    
@@ -169,9 +168,9 @@ float Czas_Bellman(Macierz& M) {
 		return -1;
 }
 
-/*
-	DIJKSTRA
-*/
+
+//-----------------------	DIJKSTRA ---------------------------------------
+
 int minDyst(Macierz& M){
 	int min = INF,min_index;
 	for (int i = 0; i < M.Zwroc_Wierz(); i++) {
@@ -198,8 +197,6 @@ void Wyswietl(Macierz& M) {
 	}
 
 	delete[] S;
-	delete M.koszt;
-	delete M.numer;
 }
 
 void Dijkstra(Macierz& M, int wierzch_start = 0) {
@@ -223,7 +220,9 @@ void Dijkstra(Macierz& M, int wierzch_start = 0) {
 				M.numer[v] = u;
 			}
 	}
-	Wyswietl(M);
+	//Wyswietl(M);
+	delete M.koszt;
+	delete M.numer;
 }
 
 float Czas_Dijkstra(Macierz& M) {
@@ -233,7 +232,6 @@ float Czas_Dijkstra(Macierz& M) {
 	Dijkstra(M);
 	stop = clock();
 	czas = (float)(stop - start)/ CLOCKS_PER_SEC;
-	M.Usun();
 	return czas;
 }
 
