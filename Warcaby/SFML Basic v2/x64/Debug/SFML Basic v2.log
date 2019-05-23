@@ -1,0 +1,101 @@
+﻿  main.cpp
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\wyswietlanie.h(63): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\wyswietlanie.h(66): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\wyswietlanie.h(69): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\wyswietlanie.h(72): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\wyswietlanie.h(77): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\wyswietlanie.h(80): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\wyswietlanie.h(83): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\wyswietlanie.h(86): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\wyswietlanie.h(91): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\wyswietlanie.h(94): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\wyswietlanie.h(97): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\wyswietlanie.h(100): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\wyswietlanie.h(121): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\wyswietlanie.h(124): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\wyswietlanie.h(127): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\wyswietlanie.h(130): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\wyswietlanie.h(135): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\wyswietlanie.h(138): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\wyswietlanie.h(141): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\wyswietlanie.h(144): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\wyswietlanie.h(149): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\wyswietlanie.h(152): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\wyswietlanie.h(155): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\wyswietlanie.h(158): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\arena_sfml.h(1096): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\arena_sfml.h(1102): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\arena_sfml.h(1108): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\arena_sfml.h(1114): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\arena_sfml.h(1120): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\arena_sfml.h(1126): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\arena_sfml.h(1132): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\arena_sfml.h(1138): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\arena_sfml.h(1144): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\arena_sfml.h(1150): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\arena_sfml.h(1156): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\arena_sfml.h(1162): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\arena_sfml.h(1168): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\arena_sfml.h(1176): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\arena_sfml.h(1182): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\arena_sfml.h(1188): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\arena_sfml.h(1194): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\arena_sfml.h(1200): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\arena_sfml.h(1206): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\arena_sfml.h(1212): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\arena_sfml.h(1218): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\arena_sfml.h(1224): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\arena_sfml.h(1230): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\arena_sfml.h(1236): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1056): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1062): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1068): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1074): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1080): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1086): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1092): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1098): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1104): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1110): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1116): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1122): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1128): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1136): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1142): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1148): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1154): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1160): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1166): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1172): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1178): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1184): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1190): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1196): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1286): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1289): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1292): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1295): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1300): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1303): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1306): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1309): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1314): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1317): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1320): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1323): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1344): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1347): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1350): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1353): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1358): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1361): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1364): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1367): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1372): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1375): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1378): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(1381): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\nagłówek.h(762): warning C4715: "Arena2::Przesun_Pionek”: niewszystkie ścieżki kodu zwracają wartość
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\main.cpp(249): warning C4715: "ZwrocY”: niewszystkie ścieżki kodu zwracają wartość
+c:\users\leghart\desktop\pwr\pamsi\warcaby\sfml basic v2\main.cpp(268): warning C4715: "ZwrocX”: niewszystkie ścieżki kodu zwracają wartość
+sfml-graphics-d.lib(sfml-graphics-d-2.dll) : fatal error LNK1112: wystąpił konflikt typu maszyny modułu „x86” z typem maszyny docelowej „x64”
