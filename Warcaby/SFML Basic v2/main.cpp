@@ -4,7 +4,7 @@
 #include <SFML/Audio.hpp>
 #include <string>
 #include <iostream>
-#include "Wyswietlanie.h"
+#include "Ekran.h"
 #include "Arena.h"
 #include "AI.h"
 using namespace std;
@@ -13,16 +13,12 @@ using namespace std;
 int ZwrocX(int);
 char ZwrocY(int);
 
-int main(){
-	Ekran E;
-	Arena A;
-	AI AI;
 
+void Gracz_vs_SI(Ekran &E,Arena &A,AI& AI) {
 	/* zmienne startowe*/
-	int x, y, gracz=1,xk,yk,xp,yp;
-	string Gracz[2] = { "biale","czarne" };
+	int x, y, gracz = 1, xk, yk, xp, yp;
 	int pom[2];
-	bool Czy_Lewy = false, Czy_Prawy = false, wysw = false;;
+	bool Czy_Lewy = false, Czy_Prawy = false, wysw = false;
 	int bicie = 0;
 	int punkty_b = 0, punkty_c = 0;
 
@@ -30,17 +26,17 @@ int main(){
 	E.Tworz_Plansze();
 	E.Ulozenie_Pionkow();
 
-	while (oknoAplikacji.isOpen()){
+	while (oknoAplikacji.isOpen()) {
 
 		/* zmiana tury gracza*/
-		if (wysw == false){
+		if (wysw == false) {
 			system("cls");
-			cout << "TURA GRACZA " << gracz << endl; 
+			cout << "TURA GRACZA " << gracz << endl;
 			wysw = true;
 		}
 		sf::Event zdarzenie;
 
-		while (oknoAplikacji.pollEvent(zdarzenie)){
+		while (oknoAplikacji.pollEvent(zdarzenie)) {
 			/* warunki zamykajace okno aplikacji*/
 			{
 				if (zdarzenie.type == sf::Event::Closed)
@@ -69,43 +65,43 @@ int main(){
 				Czy_Prawy = true;
 			}
 
-			if (Czy_Lewy == true && Czy_Prawy == true){
+			if (Czy_Lewy == true && Czy_Prawy == true) {
 				wysw = false;
 				bicie = 0;
 				xp = xk;
-				yp = (int)yk-65;
+				yp = (int)yk - 65;
 				Czy_Lewy = false;
 				Czy_Prawy = false;
 
 				pom[1] = ((int)yk - 65) - ((int)y - 65);
 				pom[0] = xk - x;
 
-				int wynik = A.Przesun_Pionek(x, (int)y-65, xk, (int)yk-65, gracz, E); 
+				int wynik = A.Przesun_Pionek(x, (int)y - 65, xk, (int)yk - 65, gracz, E);
 
 				if (wynik == 1) //jesli mozliwy ruch
 				{
 					bicie++;
-					switch (A.Kierunek_Bicia(pom)){ // to w zaleznosci w jakim kierunku jest oblicz nowe polozenie pionka
-					case 0:{
+					switch (A.Kierunek_Bicia(pom)) { // to w zaleznosci w jakim kierunku jest oblicz nowe polozenie pionka
+					case 0: {
 						pom[1] = ((int)yk - 65) - ((int)y - 65) - 1;
 						pom[0] = xk - x - 1;
 					}
-					break;
-					case 1:{
+							break;
+					case 1: {
 						pom[1] = ((int)yk - 65) - ((int)y - 65) + 1;
 						pom[0] = xk - x - 1;
 					}
-					break;
-					case 2:{
+							break;
+					case 2: {
 						pom[1] = ((int)yk - 65) - ((int)y - 65) - 1;
 						pom[0] = xk - x + 1;
 					}
-					break;
-					case 3:{
+							break;
+					case 3: {
 						pom[1] = ((int)yk - 65) - ((int)y - 65) + 1;
 						pom[0] = xk - x + 1;
 					}
-					break;
+							break;
 					}
 					/* aktualizacja polozenia*/
 					yp = ((int)y - 65) + pom[1];
@@ -115,10 +111,10 @@ int main(){
 
 				/* tura SI*/
 				AI.Koncowy_Ruch(A);
-				A.Przesun_Pionek(AI.TabKoniec[0], AI.TabKoniec[1], AI.TabKoniec[2], AI.TabKoniec[3], gracz,E);
+				A.Przesun_Pionek(AI.TabKoniec[0], AI.TabKoniec[1], AI.TabKoniec[2], AI.TabKoniec[3], gracz, E);
 				gracz--;
+			}
 		}
-	}
 		/* odswiez ulozenie pinkow na planszy*/
 		{
 			oknoAplikacji.draw(E.Sprite);
@@ -148,9 +144,218 @@ int main(){
 			oknoAplikacji.draw(E.Pc11);
 			oknoAplikacji.draw(E.Pc12);
 		}
-
 		oknoAplikacji.display();
 	}
+}
+void Gracz_vs_Gracz(Ekran &E, Arena &A) {
+
+	/* zmienne startowe*/
+	int x, y, gracz = 1, xk, yk, xp, yp;
+	int pom[2];
+	bool Czy_Lewy = false, Czy_Prawy = false, wysw = false;;
+	int bicie = 0;
+	int punkty_b = 0, punkty_c = 0;
+
+	sf::RenderWindow oknoAplikacji(sf::VideoMode(800, 800, 32), "Warcaby");
+	E.Tworz_Plansze();
+	E.Ulozenie_Pionkow();
+
+	while (oknoAplikacji.isOpen()) {
+
+		/* zmiana tury gracza*/
+		if (wysw == false) {
+			system("cls");
+			cout << "TURA GRACZA " << gracz << endl;
+			wysw = true;
+		}
+		sf::Event zdarzenie;
+
+		while (oknoAplikacji.pollEvent(zdarzenie)) {
+			/* warunki zamykajace okno aplikacji*/
+			{
+				if (zdarzenie.type == sf::Event::Closed)
+					oknoAplikacji.close();
+
+				if (zdarzenie.type == sf::Event::KeyPressed && zdarzenie.key.code == sf::Keyboard::Escape)
+					oknoAplikacji.close();
+
+				if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Middle)
+					oknoAplikacji.close();
+			}
+
+			/* wybiera polozenie startowe*/
+			if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Left)
+			{
+				x = ZwrocX(zdarzenie.mouseButton.y);
+				y = ZwrocY(zdarzenie.mouseButton.x);
+				Czy_Lewy = true;
+			}
+
+			/* wybiera polozenie koncowe*/
+			if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Right)
+			{
+				xk = ZwrocX(zdarzenie.mouseButton.y);
+				yk = ZwrocY(zdarzenie.mouseButton.x);
+				Czy_Prawy = true;
+			}
+
+			if (Czy_Lewy == true && Czy_Prawy == true) {
+				wysw = false;
+				bicie = 0;
+				xp = xk;
+				yp = (int)yk - 65;
+				Czy_Lewy = false;
+				Czy_Prawy = false;
+
+				pom[1] = ((int)yk - 65) - ((int)y - 65);
+				pom[0] = xk - x;
+
+				int wynik = A.Przesun_Pionek(x, (int)y - 65, xk, (int)yk - 65, gracz, E);
+				/* jesli mozliwy ruch */
+				if (wynik == 1 && gracz==1) 
+				{
+					bicie++;
+					switch (A.Kierunek_Bicia(pom)) { // to w zaleznosci w jakim kierunku jest oblicz nowe polozenie pionka
+					case 0: {
+						pom[1] = ((int)yk - 65) - ((int)y - 65) - 1;
+						pom[0] = xk - x - 1;
+					}
+							break;
+					case 1: {
+						pom[1] = ((int)yk - 65) - ((int)y - 65) + 1;
+						pom[0] = xk - x - 1;
+					}
+							break;
+					case 2: {
+						pom[1] = ((int)yk - 65) - ((int)y - 65) - 1;
+						pom[0] = xk - x + 1;
+					}
+							break;
+					case 3: {
+						pom[1] = ((int)yk - 65) - ((int)y - 65) + 1;
+						pom[0] = xk - x + 1;
+					}
+							break;
+					}
+					/* aktualizacja polozenia*/
+					yp = ((int)y - 65) + pom[1];
+					xp = x + pom[0];
+				}
+
+				gracz--;
+
+				/* tura 2 gracza */
+
+				bicie = 0;
+				xp = xk;
+				yp = (int)yk - 65;
+				Czy_Lewy = false;
+				Czy_Prawy = false;
+
+				pom[1] = ((int)yk - 65) - ((int)y - 65);
+				pom[0] = xk - x;
+
+				wynik = A.Przesun_Pionek(x, (int)y - 65, xk, (int)yk - 65, gracz, E);
+				/* jesli mozliwy ruch */
+				if (wynik == 1 && gracz==0)
+				{
+					bicie++;
+					switch (A.Kierunek_Bicia(pom)) { // to w zaleznosci w jakim kierunku jest oblicz nowe polozenie pionka
+					case 0: {
+						pom[1] = ((int)yk - 65) - ((int)y - 65) - 1;
+						pom[0] = xk - x - 1;
+					}
+							break;
+					case 1: {
+						pom[1] = ((int)yk - 65) - ((int)y - 65) + 1;
+						pom[0] = xk - x - 1;
+					}
+							break;
+					case 2: {
+						pom[1] = ((int)yk - 65) - ((int)y - 65) - 1;
+						pom[0] = xk - x + 1;
+					}
+							break;
+					case 3: {
+						pom[1] = ((int)yk - 65) - ((int)y - 65) + 1;
+						pom[0] = xk - x + 1;
+					}
+							break;
+					}
+					/* aktualizacja polozenia*/
+					yp = ((int)y - 65) + pom[1];
+					xp = x + pom[0];
+				}
+
+				gracz++;
+			}
+		}
+		/* odswiez ulozenie pinkow na planszy*/
+		{
+			oknoAplikacji.draw(E.Sprite);
+			oknoAplikacji.draw(E.P1);
+			oknoAplikacji.draw(E.P2);
+			oknoAplikacji.draw(E.P3);
+			oknoAplikacji.draw(E.P4);
+			oknoAplikacji.draw(E.P5);
+			oknoAplikacji.draw(E.P6);
+			oknoAplikacji.draw(E.P7);
+			oknoAplikacji.draw(E.P8);
+			oknoAplikacji.draw(E.P9);
+			oknoAplikacji.draw(E.P10);
+			oknoAplikacji.draw(E.P11);
+			oknoAplikacji.draw(E.P12);
+
+			oknoAplikacji.draw(E.Pc1);
+			oknoAplikacji.draw(E.Pc2);
+			oknoAplikacji.draw(E.Pc3);
+			oknoAplikacji.draw(E.Pc4);
+			oknoAplikacji.draw(E.Pc5);
+			oknoAplikacji.draw(E.Pc6);
+			oknoAplikacji.draw(E.Pc7);
+			oknoAplikacji.draw(E.Pc8);
+			oknoAplikacji.draw(E.Pc9);
+			oknoAplikacji.draw(E.Pc10);
+			oknoAplikacji.draw(E.Pc11);
+			oknoAplikacji.draw(E.Pc12);
+		}
+		oknoAplikacji.display();
+	}//koniec while open
+}//koniec metody
+void Menu() {
+	Ekran E;
+	Arena A;
+	AI AI;
+
+	
+		sf::SoundBuffer buffer;
+		if (!buffer.loadFromFile("soundtrack1.wav")) {
+			cout << "Nie mozna wczytac sciezki dzwiekowej" << endl;
+		}
+			sf::Sound sound;
+			sound.setBuffer(buffer);
+			sound.setVolume(20);
+			sound.play();
+
+			cout << "Z kim chcesz grac? 1-bot 2- dwoch graczy" << endl;
+			int k;
+			cin >> k;
+			switch (k) {
+			case 1:
+				Gracz_vs_SI(E, A, AI);
+				break;
+			case 2:
+				Gracz_vs_Gracz(E, A);
+				break;
+			}
+		}
+
+
+int main(){
+
+	Menu();
+	//Gracz_vs_SI(E, A, AI);
+	//Gracz_vs_Gracz(E, A);
 	return 0;
 }
 

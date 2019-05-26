@@ -138,7 +138,7 @@
   <ItemGroup>
     <ClInclude Include="AI.h" />
     <ClInclude Include="Arena.h" />
-    <ClInclude Include="Wyswietlanie.h" />
+    <ClInclude Include="Ekran.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

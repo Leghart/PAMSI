@@ -2,7 +2,7 @@
 #define ARENA_H
 #include <iostream>
 #include <math.h>
-#include "Wyswietlanie.h"
+#include "Ekran.h"
 constexpr auto ROZ = 8;
 using namespace std;
 
@@ -41,6 +41,8 @@ public:
 	void Zamien_SFML(int, int, Ekran&);
 	int Przesun_Pionek(int, int, int, int, int, Ekran&);
 };
+
+
 
 /* inicjacja zmiennych + rozmieszczenie pionkow na terminal + obliczenie pozycji SFML */
 Arena::Arena(){
@@ -426,6 +428,7 @@ int Arena::Przesun_Pionek(int x1, int y1, int x2, int y2, int gracz, Ekran &E){
 						break;
 
 						}
+						cout << "BIJE DAMKA" << endl;
 						return 1;
 					}
 					else // jesli damka nie ma bicia
@@ -452,7 +455,7 @@ int Arena::Przesun_Pionek(int x1, int y1, int x2, int y2, int gracz, Ekran &E){
 							wagi[x2][y2] = 0;
 
 							Zamien_SFML(x2 - 1, y2 - 1, E);
-							Zamien(tablica[x2 - 1][y2 - 1], x2 - 1, y2 - 1);				
+							Zamien(tablica[x2 - 1][y2 - 1], x2 - 1, y2 - 1);		
 						break;
 
 						case 1:
@@ -473,7 +476,7 @@ int Arena::Przesun_Pionek(int x1, int y1, int x2, int y2, int gracz, Ekran &E){
 							wagi[x2][y2] = 0;
 
 							Zamien_SFML(x2 - 1, y2 + 1, E);
-							Zamien(tablica[x2 - 1][y2 + 1], x2 - 1, y2 + 1);					
+							Zamien(tablica[x2 - 1][y2 + 1], x2 - 1, y2 + 1);			
 						break;
 
 						case 2:				
