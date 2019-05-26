@@ -579,263 +579,131 @@ ostream& operator << (ostream& wyjscie, Arena& A) {
 
 
 		for (int i = 65; i < 65 + 8; i++)
-		{
 			wyjscie << (char)i << "     ";
-		}
-
+		
 		wyjscie << endl;
-
 	}
 
 	{
-
 		wyjscie << "     ";
-
-		for (int i = 0; i < 24; i++)
-		{
+		for (int i = 0; i < 24; i++)	
 			wyjscie << "_ ";
-		}
-
 		wyjscie << endl << "    ";
-
 		for (int i = 0; i < ROZ + 1; i++)
-		{
-			wyjscie << "|     ";
-		}
-
+			wyjscie << "|     ";	
 		wyjscie << endl << " 0" << "  ";
-
-		for (int i = 0; i < ROZ; i++)
-		{
-			wyjscie << "|  " << A.tablica[0][i] << "  ";
-		}
-
+		for (int i = 0; i < ROZ; i++)		
+			wyjscie << "|  " << A.tablica[0][i] << "  ";		
 		wyjscie << "|  " << "0";
-
 		wyjscie << endl << "    ";
-
 		for (int i = 0; i < ROZ; i++)
-		{
 			wyjscie << "|_ _ _";
-		}
-
 		wyjscie << "|     ";
-
 	}
 
 	{
 		wyjscie << endl << "    ";
-
 		for (int i = 0; i < ROZ + 1; i++)
-		{
 			wyjscie << "|     ";
-		}
-
 		wyjscie << endl << " 1" << "  ";
-
-
 		for (int i = 0; i < ROZ; i++)
-		{
 			wyjscie << "|  " << A.tablica[1][i] << "  ";
-		}
-
 		wyjscie << "|  " << "1";
-
 		wyjscie << endl << "    ";
-
 		for (int i = 0; i < ROZ; i++)
-		{
 			wyjscie << "|_ _ _";
-		}
-
 		wyjscie << "|     " << endl;
-
 	}
 
 	{
 		wyjscie << "    ";
-
 		for (int i = 0; i < ROZ + 1; i++)
-		{
 			wyjscie << "|     ";
-		}
-
 		wyjscie << endl << " 2" << "  ";
-
-
 		for (int i = 0; i < ROZ; i++)
-		{
 			wyjscie << "|  " << A.tablica[2][i] << "  ";
-		}
-
 		wyjscie << "|  " << "2";
-
 		wyjscie << endl << "    ";
-
 		for (int i = 0; i < ROZ; i++)
-		{
 			wyjscie << "|_ _ _";
-		}
-
 		wyjscie << "|     " << endl;
-
 	}
 
 	{
 		wyjscie << "    ";
-
 		for (int i = 0; i < ROZ + 1; i++)
-		{
 			wyjscie << "|     ";
-		}
-
 		wyjscie << endl << " 3" << "  ";
-
-
 		for (int i = 0; i < ROZ; i++)
-		{
 			wyjscie << "|  " << A.tablica[3][i] << "  ";
-		}
-
 		wyjscie << "|  " << "3";
-
 		wyjscie << endl << "    ";
-
 		for (int i = 0; i < ROZ; i++)
-		{
 			wyjscie << "|_ _ _";
-		}
-
 		wyjscie << "|     " << endl;
-
 	}
 
 	{
 		wyjscie << "    ";
-
 		for (int i = 0; i < ROZ + 1; i++)
-		{
 			wyjscie << "|     ";
-		}
-
 		wyjscie << endl << " 4" << "  ";
-
-
 		for (int i = 0; i < ROZ; i++)
-		{
 			wyjscie << "|  " << A.tablica[4][i] << "  ";
-		}
-
 		wyjscie << "|  " << "4";
-
 		wyjscie << endl << "    ";
-
 		for (int i = 0; i < ROZ; i++)
-		{
 			wyjscie << "|_ _ _";
-		}
-
 		wyjscie << "|     " << endl;
-
 	}
 
 	{
 		wyjscie << "    ";
-
 		for (int i = 0; i < ROZ + 1; i++)
-		{
 			wyjscie << "|     ";
-		}
-
 		wyjscie << endl << " 5" << "  ";
-
-
 		for (int i = 0; i < ROZ; i++)
-		{
 			wyjscie << "|  " << A.tablica[5][i] << "  ";
-		}
-
 		wyjscie << "|  " << "5";
-
 		wyjscie << endl << "    ";
-
 		for (int i = 0; i < ROZ; i++)
-		{
 			wyjscie << "|_ _ _";
-		}
-
 		wyjscie << "|     " << endl;
-
 	}
 
 	{
 		wyjscie << "    ";
-
 		for (int i = 0; i < ROZ + 1; i++)
-		{
 			wyjscie << "|     ";
-		}
-
 		wyjscie << endl << " 6" << "  ";
-
-
 		for (int i = 0; i < ROZ; i++)
-		{
 			wyjscie << "|  " << A.tablica[6][i] << "  ";
-		}
-
 		wyjscie << "|  " << "6";
-
 		wyjscie << endl << "    ";
-
 		for (int i = 0; i < ROZ; i++)
-		{
 			wyjscie << "|_ _ _";
-		}
-
 		wyjscie << "|     " << endl;
-
 	}
 
 	{
 		wyjscie << "    ";
-
 		for (int i = 0; i < ROZ + 1; i++)
-		{
 			wyjscie << "|     ";
-		}
-
 		wyjscie << endl << " 7" << "  ";
-
 		for (int i = 0; i < ROZ; i++)
-		{
 			wyjscie << "|  " << A.tablica[7][i] << "  ";
-		}
-
 		wyjscie << "|  " << "7";
-
 		wyjscie << endl << "    ";
-
 		for (int i = 0; i < ROZ; i++)
-		{
 			wyjscie << "|_ _ _";
-		}
-
 		wyjscie << "|     " << endl;
-
 	}
 
 	{
 		wyjscie << endl << "       ";
-
-
 		for (int i = 65; i < 65 + 8; i++)
-		{
 			wyjscie << (char)i << "     ";
-		}
-
 	}
-
 
 	return wyjscie;
 }
@@ -851,73 +719,73 @@ void Arena::Animacja(int xp, int yp,int xk,int yk, Ekran &E1){
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P1.setPosition(pomx, pomy);
+		E1.Pb1.setPosition(pomx, pomy);
 	}
 	else if (znakpom == "Pb2")
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P2.setPosition(pomx, pomy);
+		E1.Pb2.setPosition(pomx, pomy);
 	}
 	else if (znakpom == "Pb3")
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P3.setPosition(pomx, pomy);
+		E1.Pb3.setPosition(pomx, pomy);
 	}
 	else if (znakpom == "Pb4")
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P4.setPosition(pomx, pomy);
+		E1.Pb4.setPosition(pomx, pomy);
 	}
 	else if (znakpom == "Pb5")
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P5.setPosition(pomx, pomy);
+		E1.Pb5.setPosition(pomx, pomy);
 	}
 	else if (znakpom == "Pb6")
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P6.setPosition(pomx, pomy);
+		E1.Pb6.setPosition(pomx, pomy);
 	}
 	else if (znakpom == "Pb7")
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P7.setPosition(pomx, pomy);
+		E1.Pb7.setPosition(pomx, pomy);
 	}
 	else if (znakpom == "Pb8")
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P8.setPosition(pomx, pomy);
+		E1.Pb8.setPosition(pomx, pomy);
 	}
 	else if (znakpom == "Pb9")
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P9.setPosition(pomx, pomy);
+		E1.Pb9.setPosition(pomx, pomy);
 	}
 	else if (znakpom == "Pb10")
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P10.setPosition(pomx, pomy);
+		E1.Pb10.setPosition(pomx, pomy);
 	}
 	else if (znakpom == "Pb11")
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P11.setPosition(pomx, pomy);
+		E1.Pb11.setPosition(pomx, pomy);
 	}
 	else if (znakpom == "Pb12")
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P12.setPosition(pomx, pomy);
+		E1.Pb12.setPosition(pomx, pomy);
 	}
 	else if (znakpom == "Pc1")
 	{
@@ -1007,73 +875,73 @@ void Arena::Wyczysc_Pole(int xk, int yk, Ekran &E1)
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P1.setTexture(E1.Pole);
+		E1.Pb1.setTexture(E1.Pole);
 	}
 	else if (znakpom == "Pb2")
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P2.setTexture(E1.Pole);
+		E1.Pb2.setTexture(E1.Pole);
 	}
 	else if (znakpom == "Pb3")
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P3.setTexture(E1.Pole);
+		E1.Pb3.setTexture(E1.Pole);
 	}
 	else if (znakpom == "Pb4")
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P4.setTexture(E1.Pole);
+		E1.Pb4.setTexture(E1.Pole);
 	}
 	else if (znakpom == "Pb5")
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P5.setTexture(E1.Pole);
+		E1.Pb5.setTexture(E1.Pole);
 	}
 	else if (znakpom == "Pb6")
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P6.setTexture(E1.Pole);
+		E1.Pb6.setTexture(E1.Pole);
 	}
 	else if (znakpom == "Pb7")
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P7.setTexture(E1.Pole);
+		E1.Pb7.setTexture(E1.Pole);
 	}
 	else if (znakpom == "Pb8")
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P8.setTexture(E1.Pole);
+		E1.Pb8.setTexture(E1.Pole);
 	}
 	else if (znakpom == "Pb9")
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P9.setTexture(E1.Pole);
+		E1.Pb9.setTexture(E1.Pole);
 	}
 	else if (znakpom == "Pb10")
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P10.setTexture(E1.Pole);
+		E1.Pb10.setTexture(E1.Pole);
 	}
 	else if (znakpom == "Pb11")
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P11.setTexture(E1.Pole);
+		E1.Pb11.setTexture(E1.Pole);
 	}
 	else if (znakpom == "Pb12")
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P12.setTexture(E1.Pole);
+		E1.Pb12.setTexture(E1.Pole);
 	}
 	else if (znakpom == "Pc1")
 	{
@@ -1161,73 +1029,73 @@ void Arena::Zamien_SFML(int xk, int yk, Ekran& E1)
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P1.setTexture(E1.DamkaB);
+		E1.Pb1.setTexture(E1.DamkaB);
 	}
 	else if ((wagi[xk][yk] == 1 && znakpom == "Pb2" && xk == 7))
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P2.setTexture(E1.DamkaB);
+		E1.Pb2.setTexture(E1.DamkaB);
 	}
 	else if ((wagi[xk][yk] == 1 && znakpom == "Pb3" && xk == 7))
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P3.setTexture(E1.DamkaB);
+		E1.Pb3.setTexture(E1.DamkaB);
 	}
 	else if ((wagi[xk][yk] == 1 && znakpom == "Pb4" && xk == 7))
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P4.setTexture(E1.DamkaB);
+		E1.Pb4.setTexture(E1.DamkaB);
 	}
 	else if ((wagi[xk][yk] == 1 && znakpom == "Pb5" && xk == 7))
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P5.setTexture(E1.DamkaB);
+		E1.Pb5.setTexture(E1.DamkaB);
 	}
 	else if ((wagi[xk][yk] == 1 && znakpom == "Pb6" && xk == 7))
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P6.setTexture(E1.DamkaB);
+		E1.Pb6.setTexture(E1.DamkaB);
 	}
 	else if ((wagi[xk][yk] == 1 && znakpom == "Pb7" && xk == 7))
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P7.setTexture(E1.DamkaB);
+		E1.Pb7.setTexture(E1.DamkaB);
 	}
 	else if ((wagi[xk][yk] == 1 && znakpom == "Pb8" && xk == 7))
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P8.setTexture(E1.DamkaB);
+		E1.Pb8.setTexture(E1.DamkaB);
 	}
 	else if ((wagi[xk][yk] == 1 && znakpom == "Pb9" && xk == 7))
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P9.setTexture(E1.DamkaB);
+		E1.Pb9.setTexture(E1.DamkaB);
 	}
 	else if ((wagi[xk][yk] == 1 && znakpom == "Pb10" && xk == 7))
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P10.setTexture(E1.DamkaB);
+		E1.Pb10.setTexture(E1.DamkaB);
 	}
 	else if ((wagi[xk][yk] == 1 && znakpom == "Pb11" && xk == 7))
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P11.setTexture(E1.DamkaB);
+		E1.Pb11.setTexture(E1.DamkaB);
 	}
 	else if ((wagi[xk][yk] == 1 && znakpom == "Pb12" && xk == 7))
 	{
 		pomx = Tab_Rozx[xk][yk];
 		pomy = Tab_Rozy[xk][yk];
-		E1.P12.setTexture(E1.DamkaB);
+		E1.Pb12.setTexture(E1.DamkaB);
 	}
 	
 	else if ((wagi[xk][yk] == 1 && znakpom == "Pc1" && xk == 0))

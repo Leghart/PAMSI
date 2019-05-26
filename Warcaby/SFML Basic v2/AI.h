@@ -4,14 +4,13 @@
 using namespace std;
 
 /* sztuczna inteligencja */
-class AI
-{
+class AI{
 	int pom[2], bicia,waga=0;
 	int TabRuch[3], TabBicie[3];
 	int tablicaWagRuchow[ROZ][ROZ]; // const wypelnienia domyslnymi wagami
 public:
 	int TabKoniec[4];
-	
+
 	AI();
 	int Ilosc_Bic(int, int, Arena&);
 	int Mozliwy_Ruch_AI(int, int, Arena&);
@@ -50,32 +49,26 @@ TabKoniec[3] = 0;
 }
 
 /* zwraca ilosc mozliwych bic jakie pionek moze osiagnac */
-int AI::Ilosc_Bic(int xp, int yp, Arena &A)
-{
+int AI::Ilosc_Bic(int xp, int yp, Arena &A){
 	bicia = 0;
 	int xk, yk;
 
 	int lastx = -5, lasty = -5;
 
-	while (Czy_Mozliwe_Bicie_AI(xp, yp, lastx, lasty,A) != -1)
-	{
-		if (Czy_Mozliwe_Bicie_AI(xp, yp, lastx, lasty,A) == 0)
-		{
+	while (Czy_Mozliwe_Bicie_AI(xp, yp, lastx, lasty,A) != -1){
+		if (Czy_Mozliwe_Bicie_AI(xp, yp, lastx, lasty,A) == 0){
 			xk = xp - 1;
 			yk = yp - 1;
 		}
-		else if (Czy_Mozliwe_Bicie_AI(xp, yp, lastx, lasty,A) == 1)
-		{
+		else if (Czy_Mozliwe_Bicie_AI(xp, yp, lastx, lasty,A) == 1){
 			xk = xp + 1;
 			yk = yp - 1;
 		}
-		else if (Czy_Mozliwe_Bicie_AI(xp, yp, lastx, lasty,A) == 2)
-		{
+		else if (Czy_Mozliwe_Bicie_AI(xp, yp, lastx, lasty,A) == 2){
 			xk = xp - 1;
 			yk = yp + 1;
 		}
-		else if (Czy_Mozliwe_Bicie_AI(xp, yp, lastx, lasty,A) == 3)
-		{
+		else if (Czy_Mozliwe_Bicie_AI(xp, yp, lastx, lasty,A) == 3){
 			xk = xp + 1;
 			yk = yp + 1;
 		}

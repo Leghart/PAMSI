@@ -17,15 +17,24 @@ public:
 	sf::Texture DamkaC;
 	sf::Texture Pole;
 	sf::Texture texture;
+	sf::Texture menu;
 	sf::Sprite Sprite;
-	sf::Sprite P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12;
+	sf::Sprite Sprite_menu;
+	sf::Sprite Pb1, Pb2, Pb3, Pb4, Pb5, Pb6, Pb7, Pb8, Pb9, Pb10, Pb11, Pb12;
 	sf::Sprite Pc1, Pc2, Pc3, Pc4, Pc5, Pc6, Pc7, Pc8, Pc9, Pc10, Pc11, Pc12;
 
+	void Menu();
 	void Tworz_Plansze();
 	void Ulozenie_Pionkow();
 };
 
 
+void Ekran::Menu() {
+	menu.loadFromFile("tlo.jpg");
+	menu.setSmooth(true);
+	
+	Sprite_menu.setTexture(menu);
+}
 
 /* Wczytuje tekstury elementow planszy*/
 void Ekran::Tworz_Plansze()
@@ -46,58 +55,58 @@ void Ekran::Ulozenie_Pionkow()
 	Pionek.loadFromFile("lannister.png");
 	Pionek.setSmooth(true);
 
-	P1.setTexture(Pionek);
-	P2.setTexture(Pionek);
-	P3.setTexture(Pionek);
-	P4.setTexture(Pionek);
-	P5.setTexture(Pionek);
-	P6.setTexture(Pionek);
-	P7.setTexture(Pionek);
-	P8.setTexture(Pionek);
-	P9.setTexture(Pionek);
-	P10.setTexture(Pionek);
-	P11.setTexture(Pionek);
-	P12.setTexture(Pionek);
+	Pb1.setTexture(Pionek);
+	Pb2.setTexture(Pionek);
+	Pb3.setTexture(Pionek);
+	Pb4.setTexture(Pionek);
+	Pb5.setTexture(Pionek);
+	Pb6.setTexture(Pionek);
+	Pb7.setTexture(Pionek);
+	Pb8.setTexture(Pionek);
+	Pb9.setTexture(Pionek);
+	Pb10.setTexture(Pionek);
+	Pb11.setTexture(Pionek);
+	Pb12.setTexture(Pionek);
 
-	P1.setScale(1.2, 1.2);
-	P1.setPosition(93, 93);
+	Pb1.setScale(1.2, 1.2);
+	Pb1.setPosition(93, 93);
 
-	P2.setScale(1.2, 1.2);
-	P2.setPosition(249, 93);
+	Pb2.setScale(1.2, 1.2);
+	Pb2.setPosition(249, 93);
 
-	P3.setScale(1.2, 1.2);
-	P3.setPosition(403, 93);
+	Pb3.setScale(1.2, 1.2);
+	Pb3.setPosition(403, 93);
 
-	P4.setScale(1.2, 1.2);
-	P4.setPosition(557, 93);
+	Pb4.setScale(1.2, 1.2);
+	Pb4.setPosition(557, 93);
 
 	////////////////////////////////
 
-	P5.setScale(1.2, 1.2);
-	P5.setPosition(171, 170);
+	Pb5.setScale(1.2, 1.2);
+	Pb5.setPosition(171, 170);
 
-	P6.setScale(1.2, 1.2);
-	P6.setPosition(325, 170);
+	Pb6.setScale(1.2, 1.2);
+	Pb6.setPosition(325, 170);
 
-	P7.setScale(1.2, 1.2);
-	P7.setPosition(479, 170);
+	Pb7.setScale(1.2, 1.2);
+	Pb7.setPosition(479, 170);
 
-	P8.setScale(1.2, 1.2);
-	P8.setPosition(634, 170);
+	Pb8.setScale(1.2, 1.2);
+	Pb8.setPosition(634, 170);
 
 	///////////////////////////////////
 
-	P9.setScale(1.2, 1.2);
-	P9.setPosition(93, 247);
+	Pb9.setScale(1.2, 1.2);
+	Pb9.setPosition(93, 247);
 
-	P10.setScale(1.2, 1.2);
-	P10.setPosition(249, 247);
+	Pb10.setScale(1.2, 1.2);
+	Pb10.setPosition(249, 247);
 
-	P11.setScale(1.2, 1.2);
-	P11.setPosition(403, 247);
+	Pb11.setScale(1.2, 1.2);
+	Pb11.setPosition(403, 247);
 
-	P12.setScale(1.2, 1.2);
-	P12.setPosition(557, 247);
+	Pb12.setScale(1.2, 1.2);
+	Pb12.setPosition(557, 247);
 
 	//////////////////////////////////////////////////////////////////////////////////
 

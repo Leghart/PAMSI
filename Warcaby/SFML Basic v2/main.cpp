@@ -118,18 +118,18 @@ void Gracz_vs_SI(Ekran &E,Arena &A,AI& AI) {
 		/* odswiez ulozenie pinkow na planszy*/
 		{
 			oknoAplikacji.draw(E.Sprite);
-			oknoAplikacji.draw(E.P1);
-			oknoAplikacji.draw(E.P2);
-			oknoAplikacji.draw(E.P3);
-			oknoAplikacji.draw(E.P4);
-			oknoAplikacji.draw(E.P5);
-			oknoAplikacji.draw(E.P6);
-			oknoAplikacji.draw(E.P7);
-			oknoAplikacji.draw(E.P8);
-			oknoAplikacji.draw(E.P9);
-			oknoAplikacji.draw(E.P10);
-			oknoAplikacji.draw(E.P11);
-			oknoAplikacji.draw(E.P12);
+			oknoAplikacji.draw(E.Pb1);
+			oknoAplikacji.draw(E.Pb2);
+			oknoAplikacji.draw(E.Pb3);
+			oknoAplikacji.draw(E.Pb4);
+			oknoAplikacji.draw(E.Pb5);
+			oknoAplikacji.draw(E.Pb6);
+			oknoAplikacji.draw(E.Pb7);
+			oknoAplikacji.draw(E.Pb8);
+			oknoAplikacji.draw(E.Pb9);
+			oknoAplikacji.draw(E.Pb10);
+			oknoAplikacji.draw(E.Pb11);
+			oknoAplikacji.draw(E.Pb12);
 
 			oknoAplikacji.draw(E.Pc1);
 			oknoAplikacji.draw(E.Pc2);
@@ -293,18 +293,18 @@ void Gracz_vs_Gracz(Ekran &E, Arena &A) {
 		/* odswiez ulozenie pinkow na planszy*/
 		{
 			oknoAplikacji.draw(E.Sprite);
-			oknoAplikacji.draw(E.P1);
-			oknoAplikacji.draw(E.P2);
-			oknoAplikacji.draw(E.P3);
-			oknoAplikacji.draw(E.P4);
-			oknoAplikacji.draw(E.P5);
-			oknoAplikacji.draw(E.P6);
-			oknoAplikacji.draw(E.P7);
-			oknoAplikacji.draw(E.P8);
-			oknoAplikacji.draw(E.P9);
-			oknoAplikacji.draw(E.P10);
-			oknoAplikacji.draw(E.P11);
-			oknoAplikacji.draw(E.P12);
+			oknoAplikacji.draw(E.Pb1);
+			oknoAplikacji.draw(E.Pb2);
+			oknoAplikacji.draw(E.Pb3);
+			oknoAplikacji.draw(E.Pb4);
+			oknoAplikacji.draw(E.Pb5);
+			oknoAplikacji.draw(E.Pb6);
+			oknoAplikacji.draw(E.Pb7);
+			oknoAplikacji.draw(E.Pb8);
+			oknoAplikacji.draw(E.Pb9);
+			oknoAplikacji.draw(E.Pb10);
+			oknoAplikacji.draw(E.Pb11);
+			oknoAplikacji.draw(E.Pb12);
 
 			oknoAplikacji.draw(E.Pc1);
 			oknoAplikacji.draw(E.Pc2);
@@ -327,28 +327,28 @@ void Menu() {
 	Arena A;
 	AI AI;
 
-	
-		sf::SoundBuffer buffer;
-		if (!buffer.loadFromFile("soundtrack1.wav")) {
-			cout << "Nie mozna wczytac sciezki dzwiekowej" << endl;
-		}
-			sf::Sound sound;
-			sound.setBuffer(buffer);
-			sound.setVolume(20);
-			sound.play();
 
-			cout << "Z kim chcesz grac? 1-bot 2- dwoch graczy" << endl;
-			int k;
-			cin >> k;
-			switch (k) {
-			case 1:
-				Gracz_vs_SI(E, A, AI);
-				break;
-			case 2:
-				Gracz_vs_Gracz(E, A);
-				break;
-			}
-		}
+	sf::SoundBuffer buffer;
+	if (!buffer.loadFromFile("soundtrack1.wav")) {
+		cout << "Nie mozna wczytac sciezki dzwiekowej" << endl;
+	}
+	sf::Sound sound;
+	sound.setBuffer(buffer);
+	sound.setVolume(20);
+	sound.play();
+
+	cout << "Z kim chcesz grac? 1-bot 2- dwoch graczy" << endl;
+	int k;
+	cin >> k;
+	switch (k) {
+	case 1:
+		Gracz_vs_SI(E, A, AI);
+		break;
+	case 2:
+		Gracz_vs_Gracz(E, A);
+		break;
+	}
+}
 
 
 int main(){
