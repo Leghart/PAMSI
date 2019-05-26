@@ -17,32 +17,29 @@ public:
 	sf::Texture DamkaC;
 	sf::Texture Pole;
 	sf::Texture texture;
+	sf::Texture texture_menu;
 	sf::Texture menu;
 	sf::Sprite Sprite;
 	sf::Sprite Sprite_menu;
 	sf::Sprite Pb1, Pb2, Pb3, Pb4, Pb5, Pb6, Pb7, Pb8, Pb9, Pb10, Pb11, Pb12;
 	sf::Sprite Pc1, Pc2, Pc3, Pc4, Pc5, Pc6, Pc7, Pc8, Pc9, Pc10, Pc11, Pc12;
 
-	void Menu();
 	void Tworz_Plansze();
 	void Ulozenie_Pionkow();
 };
 
 
-void Ekran::Menu() {
-	menu.loadFromFile("tlo.jpg");
-	menu.setSmooth(true);
-	
-	Sprite_menu.setTexture(menu);
-}
-
-/* Wczytuje tekstury elementow planszy*/
+/* Wczytuje tekstury elementow planszy i menu */
 void Ekran::Tworz_Plansze()
 {
 	texture.loadFromFile("plansza.jpg");
 	texture.setSmooth(true);
 
 	Sprite.setTexture(texture);
+
+	texture_menu.loadFromFile("tlo.jpg");
+	texture_menu.setSmooth(true);
+	Sprite_menu.setTexture(texture_menu);
 
 	Pole.loadFromFile("reset.png");
 	DamkaB.loadFromFile("lannister_D.png");

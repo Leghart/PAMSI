@@ -23,8 +23,6 @@ void Gracz_vs_SI(Ekran &E,Arena &A,AI& AI) {
 	int punkty_b = 0, punkty_c = 0;
 
 	sf::RenderWindow oknoAplikacji(sf::VideoMode(800, 800, 32), "Warcaby");
-	E.Tworz_Plansze();
-	E.Ulozenie_Pionkow();
 
 	while (oknoAplikacji.isOpen()) {
 
@@ -86,22 +84,22 @@ void Gracz_vs_SI(Ekran &E,Arena &A,AI& AI) {
 						pom[1] = ((int)yk - 65) - ((int)y - 65) - 1;
 						pom[0] = xk - x - 1;
 					}
-							break;
+						break;
 					case 1: {
 						pom[1] = ((int)yk - 65) - ((int)y - 65) + 1;
 						pom[0] = xk - x - 1;
 					}
-							break;
+						break;
 					case 2: {
 						pom[1] = ((int)yk - 65) - ((int)y - 65) - 1;
 						pom[0] = xk - x + 1;
 					}
-							break;
+						break;
 					case 3: {
 						pom[1] = ((int)yk - 65) - ((int)y - 65) + 1;
 						pom[0] = xk - x + 1;
 					}
-							break;
+						break;
 					}
 					/* aktualizacja polozenia*/
 					yp = ((int)y - 65) + pom[1];
@@ -321,12 +319,18 @@ void Gracz_vs_Gracz(Ekran &E, Arena &A) {
 		}
 		oknoAplikacji.display();
 	}//koniec while open
-}//koniec metody
+}
 void Menu() {
 	Ekran E;
 	Arena A;
 	AI AI;
 
+	bool menu = false;
+	bool Czy_Lewy = false, Czy_Prawy = false, wysw = false;
+	int xpom, ypom,wybor=0;
+
+	E.Tworz_Plansze();
+	E.Ulozenie_Pionkow();
 
 	sf::SoundBuffer buffer;
 	if (!buffer.loadFromFile("soundtrack1.wav")) {
@@ -337,25 +341,63 @@ void Menu() {
 	sound.setVolume(20);
 	sound.play();
 
-	cout << "Z kim chcesz grac? 1-bot 2- dwoch graczy" << endl;
-	int k;
-	cin >> k;
-	switch (k) {
-	case 1:
-		Gracz_vs_SI(E, A, AI);
-		break;
-	case 2:
-		Gracz_vs_Gracz(E, A);
-		break;
+	sf::RenderWindow MenuGlowne(sf::VideoMode(800, 800, 32), "Menu");
+	while (MenuGlowne.isOpen()){
+		sf::Event zdarzenie;
+		while (MenuGlowne.pollEvent(zdarzenie)) {
+			//warunki zamkniecia okna
+			{
+				if (zdarzenie.type == sf::Event::Closed)
+					MenuGlowne.close();
+
+				if (zdarzenie.type == sf::Event::KeyPressed && zdarzenie.key.code == sf::Keyboard::Escape)
+					MenuGlowne.close();
+
+				if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Middle)
+					MenuGlowne.close();
+			}
+			if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Left){
+				xpom = zdarzenie.mouseButton.x;
+				ypom = zdarzenie.mouseButton.y;
+				Czy_Lewy = true;
+			}
+			//obsluga przyciskow
+			{
+				if (Czy_Lewy == true) {
+					if (xpom < 246 && xpom>33 && ypom < 622 && ypom>564) {
+						wybor = 1;
+						menu = true;
+						MenuGlowne.close();
+					}
+					if (xpom < 212 && xpom>36 && ypom < 679 && ypom>642) {
+						wybor = 2;
+						menu = true;
+						MenuGlowne.close();
+					}
+					if (xpom < 156 && xpom>39 && ypom < 755 && ypom>709)
+						MenuGlowne.close();
+				}
+			}
+		}
+		MenuGlowne.draw(E.Sprite_menu);
+		MenuGlowne.display();
 	}
+
+switch(wybor){
+case 1:
+	Gracz_vs_Gracz(E, A);
+	break;
+case 2:
+	Gracz_vs_SI(E, A, AI);
+	break;
+default:
+	break;
+}
 }
 
 
 int main(){
-
 	Menu();
-	//Gracz_vs_SI(E, A, AI);
-	//Gracz_vs_Gracz(E, A);
 	return 0;
 }
 
