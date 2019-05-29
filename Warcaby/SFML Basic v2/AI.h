@@ -4,19 +4,27 @@
 using namespace std;
 
 /* sztuczna inteligencja */
-class AI{
-	int pom[2], bicia,waga=0;
-	int TabRuch[3], TabBicie[3];
+class AI {
+	int pom[2], bicia, waga = 0;
+	int TabRuch[3], TabBicie[3], TabBicieD[3];
+	int WzorzecWag[ROZ][ROZ];
 	int tablicaWagRuchow[ROZ][ROZ]; // const wypelnienia domyslnymi wagami
+	int punkty = 0;
+	bool Atak = false;
+	//int PozTmp[2];
 public:
 	int TabKoniec[4];
 
 	AI();
+	int Zwroc_punkty() { return punkty; }
 	int Ilosc_Bic(int, int, Arena&);
 	int Mozliwy_Ruch_AI(int, int, Arena&);
 	int Mozliwe_Bicie_AI(int, int, Arena&);
 	void Koncowy_Ruch(Arena&); 
 	int Czy_Mozliwe_Bicie_AI(int, int,int,int,Arena&);
+	void Czy_Pod_Atakiem(int, int, Arena&);
+	void Nie_Podkladaj_Sie(int, int, Arena&);
+	int Mozliwe_Bicie_AI_Damka(int, int, Arena&);
 };
 
 /* zerowanie zmiennych i uzupelnienie planszy wagami startowymi
@@ -45,6 +53,11 @@ for (int i = 0; i < 3; i++){
 	TabBicie[i] = 0;
 	TabKoniec[i] = 0;
 }
+// oryginal wag na planszy
+for (int i = 0; i < ROZ; i++)
+	for (int j = 0; j < ROZ; j++)
+		WzorzecWag[i][j] = tablicaWagRuchow[i][j];
+
 TabKoniec[3] = 0;
 }
 
@@ -143,25 +156,25 @@ int AI::Mozliwe_Bicie_AI(int xp, int yp, Arena &A){
 
 	switch (Czy_Mozliwe_Bicie_AI(xp, yp, xp, yp,A)){
 	case 0: //bicie lewo gora
-		wagakoncowa = 50;
+		wagakoncowa = 100;
 		TabBicie[0] = xp - 1;
 		TabBicie[1] = yp - 1;
 		TabBicie[2] = wagakoncowa;
 	break;
 	case 1: //bicie lewo dol
-		wagakoncowa = 50;
+		wagakoncowa = 100;
 		TabBicie[0] = xp - 1;
 		TabBicie[1] = yp + 1;
 		TabBicie[2] = wagakoncowa;
 	break;
 	case 2:	//bicie prawo gora
-		wagakoncowa = 50;
+		wagakoncowa = 100;
 		TabBicie[0] = xp + 1;
 		TabBicie[1] = yp - 1;
 		TabBicie[2] = wagakoncowa;
 	break;
 	case 3: //bicie prawo dol
-		wagakoncowa = 50;
+		wagakoncowa = 100;
 		TabBicie[0] = xp + 1;
 		TabBicie[1] = yp + 1;
 		TabBicie[2] = wagakoncowa;
@@ -183,6 +196,8 @@ void AI::Koncowy_Ruch(Arena &A){
 	for (int i = 0; i < ROZ; i++){
 		for (int j = 0; j < ROZ; j++){
 			if (A.tablica[i][j] == 'x'){
+				Nie_Podkladaj_Sie(i, j, A);
+				Czy_Pod_Atakiem(i, j, A);
 				if (waga < Mozliwy_Ruch_AI(i, j, A)) {
 					waga = TabRuch[2];
 					TabKoniec[0] = i;
@@ -197,6 +212,7 @@ void AI::Koncowy_Ruch(Arena &A){
 					TabKoniec[1] = j;
 					TabKoniec[2] = TabBicie[0];
 					TabKoniec[3] = TabBicie[1];
+					punkty++; //jako ze bicie ma najwieksza wage to jak tu sie wejdzie to bedzie ok
 				}
 			}
 			TabRuch[0] = 0;
@@ -207,6 +223,14 @@ void AI::Koncowy_Ruch(Arena &A){
 			TabBicie[1] = 0;
 			TabBicie[2] = 0;
 		}
+	}
+	for (int i = 0; i < ROZ; i++){
+		for (int j = 0; j < ROZ; j++){
+			//cout << tablicaWagRuchow[i][j] << " ";
+			tablicaWagRuchow[i][j] = WzorzecWag[i][j];
+			//cout << tablicaWagRuchow[i][j] << " ";
+		}
+		//cout << endl;
 	}
 }
 
@@ -233,5 +257,145 @@ int AI::Czy_Mozliwe_Bicie_AI(int x, int y, int xzabr, int yzabr,Arena& A)
 
 	return -1;
 }
+
+/* Sprawdza czy pion znajdzie sie pod atakiem ze strony wroga*/
+void AI::Czy_Pod_Atakiem(int xp, int yp, Arena &A)
+{
+	Atak = false;
+
+	if (A.Czy_Jest_W_Arenie(xp + 1, yp + 1) && xp != 7 && xp != 0 && yp != 7 && yp != 0){
+		if ((A.tablica[xp + 1][yp + 1] == 'o' || A.tablica[xp + 1][yp + 1] == 'O') && !A.Czy_Jest_Pionek(xp - 1, yp - 1)){
+			tablicaWagRuchow[xp - 1][yp - 1] += 50;
+			Atak = true;
+		}
+	}
+
+	if (A.Czy_Jest_W_Arenie(xp + 1, yp - 1) && xp != 7 && xp != 0 && yp != 7 && yp != 0){
+		if ((A.tablica[xp + 1][yp - 1] == 'o' || A.tablica[xp + 1][yp - 1] == 'O') && !A.Czy_Jest_Pionek(xp - 1, yp + 1)){
+			tablicaWagRuchow[xp - 1][yp + 1] += 50;
+			Atak = true;
+		}
+	}
+}
+
+/* Zabezpiecza sojusznika aby nie wystawial sie na atak*/
+void AI::Nie_Podkladaj_Sie(int xp, int yp, Arena &A){
+	if (A.Czy_Jest_W_Arenie(xp + 1 + 1, yp + 1 + 1)){
+		if (A.Czy_Jest_Pionek(xp + 1 + 1, yp + 1 + 1) && !A.Czy_Przyjaciel(A.tablica[xp][yp], A.tablica[xp + 1 + 1][yp + 1 + 1]))
+			tablicaWagRuchow[xp + 1][yp + 1] = 1;
+	}
+
+	if (A.Czy_Jest_W_Arenie(xp + 1 + 1, yp + 1 - 1)){
+		if (A.Czy_Jest_Pionek(xp + 1 + 1, yp + 1 - 1) && A.Czy_Jest_W_Arenie(xp + 1 - 1, yp + 1 + 1) && !A.Czy_Przyjaciel(A.tablica[xp][yp], A.tablica[xp + 1 + 1][yp + 1 - 1])){
+			if (!A.Czy_Jest_Pionek(xp + 1 - 1, yp + 1 + 1))
+				tablicaWagRuchow[xp + 1][yp + 1] = 1;
+		}
+	}
+
+	if (A.Czy_Jest_W_Arenie(xp + 1 + 1, yp - 1 - 1)){
+		if (A.Czy_Jest_Pionek(xp + 1 + 1, yp - 1 - 1) && !A.Czy_Przyjaciel(A.tablica[xp][yp], A.tablica[xp + 1 + 1][yp - 1 - 1]))
+			tablicaWagRuchow[xp + 1][yp - 1] = 1;
+	}
+
+	if (A.Czy_Jest_W_Arenie(xp + 1 + 1, yp - 1 + 1)){
+		if (A.Czy_Jest_Pionek(xp + 1 + 1, yp - 1 + 1) && A.Czy_Jest_W_Arenie(xp + 1 - 1, yp - 1 - 1) && !A.Czy_Przyjaciel(A.tablica[xp][yp], A.tablica[xp + 1 + 1][yp - 1 + 1])){
+			if (!A.Czy_Jest_Pionek(xp + 1 - 1, yp - 1 - 1))
+				tablicaWagRuchow[xp + 1][yp - 1] = 1;
+		}
+	}
+
+}
+
+/* ....................*/
+int AI::Mozliwe_Bicie_AI_Damka(int xp, int yp, Arena &A)
+{
+	int wagakoncowa = 0;
+
+	if (A.tablica[xp][yp] == 'X')
+	{
+		cout << A.licznik << endl;
+		//system("pause");
+		switch (A.Czy_Mozliwe_Bicie_Damka(xp, yp))
+		{
+		case 1:
+		{
+			cout << "1" << endl;
+			//system("pause");
+			wagakoncowa = 200;
+
+			for (int i = 0; i <= A.licznik; i++)
+			{
+				xp -= 1;
+				yp -= 1;
+			}
+			TabBicieD[0] = xp;
+			TabBicieD[1] = yp;
+			TabBicieD[2] = wagakoncowa;
+		}
+		break;
+
+		case 2:
+		{
+			cout << "2" << endl;
+			//system("pause");
+			wagakoncowa = 200;
+
+			for (int i = 0; i <= A.licznik; i++)
+			{
+				xp -= 1;
+				yp += 1;
+			}
+			TabBicieD[0] = xp;
+			TabBicieD[1] = yp;
+			TabBicieD[2] = wagakoncowa;
+		}
+		break;
+
+		case 3:
+		{
+			cout << "3" << endl;
+			//system("pause");
+			wagakoncowa = 200;
+			for (int i = 0; i <= A.licznik; i++)
+			{
+				xp += 1;
+				yp += 1;
+			}
+			TabBicieD[0] = xp;
+			TabBicieD[1] = yp;
+			TabBicieD[2] = wagakoncowa;
+		}
+		break;
+
+		case 4:
+		{
+			cout << "4" << endl;
+			//system("pause");
+			wagakoncowa = 200;
+			for (int i = 0; i <= A.licznik; i++)
+			{
+				xp += 1;
+				yp -= 1;
+			}
+			TabBicieD[0] = xp;
+			TabBicieD[1] = yp;
+			TabBicieD[2] = wagakoncowa;
+		}
+		break;
+
+		case -1:
+		{
+			wagakoncowa = -1;
+			TabBicieD[0] = xp;
+			TabBicieD[1] = yp;
+			TabBicieD[2] = wagakoncowa;
+		}
+		break;
+		}
+	}
+
+	return wagakoncowa;
+}
+
 #endif AI_H
 

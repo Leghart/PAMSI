@@ -16,11 +16,15 @@ public:
 	sf::Texture DamkaB;
 	sf::Texture DamkaC;
 	sf::Texture Pole;
-	sf::Texture texture;
+	sf::Texture texture_plansza;
 	sf::Texture texture_menu;
+	sf::Texture texture_win;
+	sf::Texture texture_lose;
 	sf::Texture menu;
-	sf::Sprite Sprite;
+	sf::Sprite Sprite_plansza;
 	sf::Sprite Sprite_menu;
+	sf::Sprite Sprite_win;
+	sf::Sprite Sprite_lose;
 	sf::Sprite Pb1, Pb2, Pb3, Pb4, Pb5, Pb6, Pb7, Pb8, Pb9, Pb10, Pb11, Pb12;
 	sf::Sprite Pc1, Pc2, Pc3, Pc4, Pc5, Pc6, Pc7, Pc8, Pc9, Pc10, Pc11, Pc12;
 
@@ -29,17 +33,25 @@ public:
 };
 
 
-/* Wczytuje tekstury elementow planszy i menu */
+/* Wczytuje tekstury elementow gry */
 void Ekran::Tworz_Plansze()
 {
-	texture.loadFromFile("plansza.jpg");
-	texture.setSmooth(true);
+	texture_plansza.loadFromFile("plansza.jpg");
+	texture_plansza.setSmooth(true);
 
-	Sprite.setTexture(texture);
+	Sprite_plansza.setTexture(texture_plansza);
 
 	texture_menu.loadFromFile("tlo.jpg");
 	texture_menu.setSmooth(true);
 	Sprite_menu.setTexture(texture_menu);
+
+	texture_win.loadFromFile("win.jpg");
+	texture_win.setSmooth(true);
+	Sprite_win.setTexture(texture_win);
+
+	texture_lose.loadFromFile("lose.jpg");
+	texture_lose.setSmooth(true);
+	Sprite_lose.setTexture(texture_lose);
 
 	Pole.loadFromFile("reset.png");
 	DamkaB.loadFromFile("lannister_D.png");

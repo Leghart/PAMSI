@@ -14,6 +14,7 @@ public:
 	int **Tab_Rozx;
 	int **Tab_Rozy;
 	int pom[2];
+	int licznik = 0;
 	string poms[24] = { "Pb1","Pb2","Pb3","Pb4","Pb9","Pb10","Pb11","Pb12","Pb5","Pb6","Pb7","Pb8",
 		"Pc12","Pc11","Pc10","Pc9","Pc4","Pc3","Pc2","Pc1","Pc8","Pc7","Pc6","Pc5" };
 
@@ -30,10 +31,12 @@ public:
 	bool Czy_Prawidlowy_Ruch(int[], char);
 	bool Czy_Przyjaciel(char, char);
 	bool Czy_Mozliwe_Bicie(int, int);
-	bool Czy_Mozliwe_Bicie_Damka(int, int);
+	int Czy_Mozliwe_Bicie_Damka(int, int);
 	bool Czy_Przyjaciel_Damki(int, int, int, int);
 	bool Czy_Ruch_W_Tyl(int[], char);
+	bool Czy_Droga_Wolna(int, int, int, int);
 	void Ekran_Koncowy(int, int, int);
+
 
 	// wersja SFML
 	void Animacja(int, int, int, int, Ekran&);
@@ -192,7 +195,7 @@ bool Arena::Czy_Mozliwe_Bicie(int x, int y)
 }
 
 /* to samo co wyzej ale uwzglenia ruch o wieciej niz jedno pole */
-bool Arena::Czy_Mozliwe_Bicie_Damka(int x1, int y1)
+int Arena::Czy_Mozliwe_Bicie_Damka(int x1, int y1)
 {
 	int LUp[2] = { -1,-1 };
 	int RUp[2] = { -1,1 };
@@ -208,7 +211,7 @@ bool Arena::Czy_Mozliwe_Bicie_Damka(int x1, int y1)
 
 	if (x + LUp[0] != 7 && x + LUp[0] != 0 && y + LUp[1] != 7 && y + LUp[1] != 0 &&
 		Czy_Jest_W_Arenie(x + LUp[0], y + LUp[1]) && !Czy_Jest_Pionek(x + LUp[0] - 1, y + LUp[1] - 1))
-		if (!Czy_Przyjaciel_Damki(x, y, x + LUp[0], y + LUp[1]) && Czy_Jest_Pionek(x + LUp[0], y + LUp[1])) return true;
+		if (!Czy_Przyjaciel_Damki(x, y, x + LUp[0], y + LUp[1]) && Czy_Jest_Pionek(x + LUp[0], y + LUp[1])) return 1;
 	x = x1, y = y1;
 
 	while (x != 7 && x != 0 && y != 7 && y != 0 && !Czy_Jest_Pionek(x + RUp[0], y + RUp[1])) {
@@ -217,7 +220,7 @@ bool Arena::Czy_Mozliwe_Bicie_Damka(int x1, int y1)
 	}
 	if (x + RUp[0] != 7 && x + RUp[0] != 0 && y + RUp[1] != 7 && y + RUp[1] != 0 &&
 		Czy_Jest_W_Arenie(x + RUp[0], y + RUp[1]) && !Czy_Jest_Pionek(x + RUp[0] - 1, y + RUp[1] + 1))
-		if (!Czy_Przyjaciel_Damki(x, y, x + RUp[0], y + RUp[1]) && Czy_Jest_Pionek(x + RUp[0], y + RUp[1])) return true;
+		if (!Czy_Przyjaciel_Damki(x, y, x + RUp[0], y + RUp[1]) && Czy_Jest_Pionek(x + RUp[0], y + RUp[1])) return 2;
 	x = x1, y = y1;
 
 	while (x != 7 && x != 0 && y != 7 && y != 0 && !Czy_Jest_Pionek(x + RDown[0], y + RDown[1])) {
@@ -227,7 +230,7 @@ bool Arena::Czy_Mozliwe_Bicie_Damka(int x1, int y1)
 
 	if (x + RDown[0] != 7 && x + RDown[0] != 0 && y + RDown[1] != 7 && y + RDown[1] != 0 &&
 		Czy_Jest_W_Arenie(x + RDown[0], y + RDown[1]) && !Czy_Jest_Pionek(x + RDown[0] + 1, y + RDown[1] + 1))
-		if (!Czy_Przyjaciel_Damki(x, y, x + RDown[0], y + RDown[1]) && Czy_Jest_Pionek(x + RDown[0], y + RDown[1])) return true;
+		if (!Czy_Przyjaciel_Damki(x, y, x + RDown[0], y + RDown[1]) && Czy_Jest_Pionek(x + RDown[0], y + RDown[1])) return 3;
 	x = x1, y = y1;
 
 	while (x != 7 && x != 0 && y != 7 && y != 0 && !Czy_Jest_Pionek(x + LDown[0], y + LDown[1])) {
@@ -236,9 +239,9 @@ bool Arena::Czy_Mozliwe_Bicie_Damka(int x1, int y1)
 	}
 	if (x + LDown[0] != 7 && x + LDown[0] != 0 && y + LDown[1] != 7 && y + LDown[1] != 0 &&
 		Czy_Jest_W_Arenie(x + LDown[0], y + LDown[1]) && !Czy_Jest_Pionek(x + LDown[0] + 1, y + LDown[1] - 1))
-		if (!Czy_Przyjaciel_Damki(x, y, x + LDown[0], y + LDown[1]) && Czy_Jest_Pionek(x + LDown[0], y + LDown[1])) return true;
+		if (!Czy_Przyjaciel_Damki(x, y, x + LDown[0], y + LDown[1]) && Czy_Jest_Pionek(x + LDown[0], y + LDown[1])) return 4;
 
-	return false;
+	return -1;
 }
 
 /* jak nazwa metody (porownuje polozenie) */
@@ -247,6 +250,30 @@ bool Arena::Czy_Przyjaciel_Damki(int x, int y, int x1, int y1){
 	else if (tablica[x][y] == 'O' && tablica[x1][y1] == 'o') return true;
 	else if (tablica[x][y] == 'X' && tablica[x1][y1] == 'x') return true;
 	else return false;
+}
+
+/* sprawda czy na drodze damki stoi jakis pion (uniemozliwa teleport) */
+bool Arena::Czy_Droga_Wolna(int xp, int yp, int xk, int yk) {
+	int pom[2];
+	if (xk - xp < 0)
+		pom[0] = -1;
+	else
+		pom[0] = 1;
+	if (yk - yp < 0)
+		pom[1] = -1;
+	else
+		pom[1] = 1;
+
+	while (xp != xk && yp != yk){
+		xp += pom[0];
+		yp += pom[1];
+
+		if (Czy_Jest_Pionek(xp, yp))
+			return false;
+		
+	}
+
+	return true;
 }
 
 /* przyporzadkowuje mozliwym wektorom bic cyfre int */
