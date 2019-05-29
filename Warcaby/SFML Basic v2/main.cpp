@@ -13,9 +13,9 @@ using namespace std;
 /* Zamiana wspolrzednych na plaszny na wygondy uklad odniesienia*/
 int ZwrocX(int);
 char ZwrocY(int);
+int Menu();
 
-
-void Gracz_vs_SI(Ekran &E,Arena &A,AI& AI) {
+int Gracz_vs_SI(Ekran &E,Arena &A,AI& AI) {
 	/* zmienne startowe*/
 	int x, y, gracz = 1, xk, yk, xp, yp;
 	int pom[2];
@@ -23,6 +23,7 @@ void Gracz_vs_SI(Ekran &E,Arena &A,AI& AI) {
 	int bicie = 0;
 	int punkty = 0;
 	int pkt_si = 0;
+	int wynik_gry = 0;
 
 	sf::RenderWindow oknoAplikacji(sf::VideoMode(800, 800, 32), "Warcaby");
 
@@ -35,18 +36,21 @@ void Gracz_vs_SI(Ekran &E,Arena &A,AI& AI) {
 			wysw = true;
 		}
 		sf::Event zdarzenie;
-		//while (pkt_gracza != 12 || pkt_si != 12) {
 			while (oknoAplikacji.pollEvent(zdarzenie)) {
 				/* warunki zamykajace okno aplikacji*/
 				{
-					if (zdarzenie.type == sf::Event::Closed)
+					if (zdarzenie.type == sf::Event::Closed) {
 						oknoAplikacji.close();
-
-					if (zdarzenie.type == sf::Event::KeyPressed && zdarzenie.key.code == sf::Keyboard::Escape)
+						return 0;
+					}
+					if (zdarzenie.type == sf::Event::KeyPressed && zdarzenie.key.code == sf::Keyboard::Escape) {
 						oknoAplikacji.close();
-
-					if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Middle)
+						return 0;
+					}
+					if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Middle) {
 						oknoAplikacji.close();
+						return 0;
+					}
 				}
 
 				/* wybiera polozenie startowe*/
@@ -109,10 +113,56 @@ void Gracz_vs_SI(Ekran &E,Arena &A,AI& AI) {
 						xp = x + pom[0];
 					}
 					Sleep(200);
-
+					
+					//po zbiciu wszystkich pionkow si
 					if (bicie == 0 || (bicie > 0 && !A.Czy_Mozliwe_Bicie(xp, yp))) {
 						if (punkty == 12) {
 							oknoAplikacji.close();
+
+							/********************** Ekran zwyciestwa *******************************/
+							sf::RenderWindow oknoAplikacji(sf::VideoMode(800, 800, 32), "Wygrana");
+							int x, y;
+							while (oknoAplikacji.isOpen()) {
+								sf::Event zdarzenie;
+								while (oknoAplikacji.pollEvent(zdarzenie)) {
+
+									//obsluga przycisku								
+									if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Left)
+									{
+										x = zdarzenie.mouseButton.x;
+										y = zdarzenie.mouseButton.y;
+										Czy_Lewy = true;
+									}
+									/* warunki zamykajace okno aplikacji*/
+									{
+										if (zdarzenie.type == sf::Event::Closed) {
+											oknoAplikacji.close();
+											return 0;
+										}
+										if (zdarzenie.type == sf::Event::KeyPressed && zdarzenie.key.code == sf::Keyboard::Escape) {
+											oknoAplikacji.close();
+											return 0;
+										}
+									}
+
+									if (Czy_Lewy == true) {
+										//zakoncz
+										if (x > 66 && x < 202 && y > 280 && y < 335) {
+											oknoAplikacji.close();
+											return 0;
+										}
+										//graj ponownie
+										if (x < 350 && x > 15 && y < 230 && y > 160) {
+											oknoAplikacji.close();
+											return 1;
+										}
+									}
+								
+									oknoAplikacji.draw(E.Sprite_win);
+									oknoAplikacji.display();
+								}
+							}
+							/********************************************************************/
 							break;
 						}
 						gracz++;
@@ -136,6 +186,53 @@ void Gracz_vs_SI(Ekran &E,Arena &A,AI& AI) {
 
 						if (AI.Zwroc_punkty() == 12) {
 							oknoAplikacji.close();
+
+							/********************** Ekran przegranej *******************************/
+							sf::RenderWindow oknoAplikacji(sf::VideoMode(800, 800, 32), "Przegrana");
+							int x, y;
+							while (oknoAplikacji.isOpen()) {
+								sf::Event zdarzenie;
+								while (oknoAplikacji.pollEvent(zdarzenie)) {
+
+									//obsluga przycisku								
+									if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Left)
+									{
+										x = zdarzenie.mouseButton.x;
+										y = zdarzenie.mouseButton.y;
+										Czy_Lewy = true;
+									}
+									/* warunki zamykajace okno aplikacji*/
+									{
+										if (zdarzenie.type == sf::Event::Closed) {
+											oknoAplikacji.close();
+											return 0;
+										}
+
+										if (zdarzenie.type == sf::Event::KeyPressed && zdarzenie.key.code == sf::Keyboard::Escape) {
+											oknoAplikacji.close();
+											return 0;
+										}
+									}
+
+									if (Czy_Lewy == true) {
+										//zakoncz
+										if (x > 530 && x < 680 && y > 240 && y < 300) {
+											oknoAplikacji.close();
+											return 0;
+										}
+
+										//graj ponownie
+										if (x < 750 && x > 420 && y < 200 && y > 140) {
+											oknoAplikacji.close();
+											return 1;
+										}
+									}
+
+									oknoAplikacji.draw(E.Sprite_lose);
+									oknoAplikacji.display();
+								}
+							}
+
 							break;
 						}
 					}
@@ -174,8 +271,9 @@ void Gracz_vs_SI(Ekran &E,Arena &A,AI& AI) {
 			oknoAplikacji.display();
 
 	}
+	return 0;
 }
-void Gracz_vs_Gracz(Ekran &E, Arena &A) {
+int Gracz_vs_Gracz(Ekran &E, Arena &A) {
 	/* zmienne startowe*/
 	int x, y, gracz = 1, xk, yk, xp, yp;
 	int pom[2];
@@ -183,6 +281,7 @@ void Gracz_vs_Gracz(Ekran &E, Arena &A) {
 	int bicie = 0;
 	int punkty1 = 0,punkty2=0;
 	int pomgracz;
+	string Gracz[2] = { "Stark","Lannister" };
 
 	sf::RenderWindow oknoAplikacji(sf::VideoMode(800, 800, 32), "Warcaby");
 	E.Tworz_Plansze();
@@ -192,7 +291,7 @@ void Gracz_vs_Gracz(Ekran &E, Arena &A) {
 		/* zmiana tury gracza*/
 		if (wysw == false) {
 			system("cls");
-			cout << "TURA GRACZA " << gracz << endl;
+			cout << "TURA GRACZA " << Gracz[gracz-1] << endl;
 			wysw = true;
 		}
 		sf::Event zdarzenie;
@@ -202,14 +301,20 @@ void Gracz_vs_Gracz(Ekran &E, Arena &A) {
 		while (oknoAplikacji.pollEvent(zdarzenie)) {
 			/* warunki zamykajace okno aplikacji*/
 			{
-				if (zdarzenie.type == sf::Event::Closed)
+				if (zdarzenie.type == sf::Event::Closed) {
 					oknoAplikacji.close();
+					return 0;
+				}
 
-				if (zdarzenie.type == sf::Event::KeyPressed && zdarzenie.key.code == sf::Keyboard::Escape)
+				if (zdarzenie.type == sf::Event::KeyPressed && zdarzenie.key.code == sf::Keyboard::Escape) {
 					oknoAplikacji.close();
+					return 0;
+				}
 
-				if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Middle)
+				if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Middle) {
 					oknoAplikacji.close();
+					return 0;
+				}
 			}
 
 			/* wybiera polozenie startowe*/
@@ -326,9 +431,10 @@ void Gracz_vs_Gracz(Ekran &E, Arena &A) {
 			oknoAplikacji.draw(E.Pc12);
 		}
 		oknoAplikacji.display();
-	}//koniec while open
+	}
+	return 0;
 }
-void Menu() {
+int Menu() {
 	Ekran E;
 	Arena A;
 	AI AI;
@@ -356,14 +462,20 @@ void Menu() {
 		while (MenuGlowne.pollEvent(zdarzenie)) {
 			//warunki zamkniecia okna
 			{
-				if (zdarzenie.type == sf::Event::Closed)
+				if (zdarzenie.type == sf::Event::Closed) {
 					MenuGlowne.close();
+					return 0;
+				}
 
-				if (zdarzenie.type == sf::Event::KeyPressed && zdarzenie.key.code == sf::Keyboard::Escape)
+				if (zdarzenie.type == sf::Event::KeyPressed && zdarzenie.key.code == sf::Keyboard::Escape) {
 					MenuGlowne.close();
+					return 0;
+				}
 
-				if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Middle)
+				if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Middle) {
 					MenuGlowne.close();
+					return 0;
+				}
 			}
 			if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Left){
 				xpom = zdarzenie.mouseButton.x;
@@ -375,16 +487,16 @@ void Menu() {
 				if (Czy_Lewy == true) {
 					if (xpom < 246 && xpom>33 && ypom < 622 && ypom>564) {
 						wybor = 1;
-						menu = true;
 						MenuGlowne.close();
 					}
 					if (xpom < 212 && xpom>36 && ypom < 679 && ypom>642) {
-						wybor = 2;
-						menu = true;
+						wybor = 2;				
 						MenuGlowne.close();
 					}
-					if (xpom < 156 && xpom>39 && ypom < 755 && ypom>709)
+					if (xpom < 156 && xpom>39 && ypom < 755 && ypom>709) {
 						MenuGlowne.close();
+						return 0;
+					}
 				}
 			}
 		}
@@ -394,19 +506,24 @@ void Menu() {
 
 switch(wybor){
 case 1:
-	Gracz_vs_Gracz(E, A);
+	return Gracz_vs_Gracz(E, A);
 	break;
 case 2:
-	Gracz_vs_SI(E, A, AI);
+	return Gracz_vs_SI(E, A, AI);
 	break;
 default:
 	break;
 }
+return 0;
 }
 
-
+/* wszytskie 1 zwracane przez funkcje kontunuuja prace petli
+	a 0 zatrzymuja jej prace	*/
 int main(){
-	Menu();
+	int start = 1;
+	while (start != 0) {
+		start = Menu();
+	}
 	return 0;
 }
 
