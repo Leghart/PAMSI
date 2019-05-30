@@ -1,0 +1,195 @@
+#ifndef WYSWIETLANIE_H
+#define WYSWIETLANIE _H
+#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
+#include <SFML/Network.hpp>
+#include <SFML/Audio.hpp>
+#include <string>
+#include <iostream>
+using namespace std;
+
+/* klasa odpowiedzialna na wyswietlanie graficzne gry*/
+class Ekran{
+public:
+	sf::Texture Pionek;
+	sf::Texture PionekC;
+	sf::Texture DamkaB;
+	sf::Texture DamkaC;
+	sf::Texture Pole;
+	sf::Texture texture_plansza;
+	sf::Texture texture_menu;
+	sf::Texture texture_win;
+	sf::Texture texture_lose;
+	sf::Texture texture_stark;
+	sf::Texture texture_lannister;
+	sf::Texture menu;
+	sf::Sprite Sprite_plansza;
+	sf::Sprite Sprite_menu;
+	sf::Sprite Sprite_win;
+	sf::Sprite Sprite_lose;
+	sf::Sprite Sprite_stark;
+	sf::Sprite Sprite_lannister;
+	sf::Sprite Pb1, Pb2, Pb3, Pb4, Pb5, Pb6, Pb7, Pb8, Pb9, Pb10, Pb11, Pb12;
+	sf::Sprite Pc1, Pc2, Pc3, Pc4, Pc5, Pc6, Pc7, Pc8, Pc9, Pc10, Pc11, Pc12;
+
+	void Tworz_Plansze();
+	void Ulozenie_Pionkow();
+};
+
+
+/* Wczytuje tekstury elementow gry */
+void Ekran::Tworz_Plansze()
+{
+	texture_plansza.loadFromFile("image/plansza.jpg");
+	texture_plansza.setSmooth(true);
+
+	Sprite_plansza.setTexture(texture_plansza);
+
+	texture_menu.loadFromFile("image/tlo.jpg");
+	texture_menu.setSmooth(true);
+	Sprite_menu.setTexture(texture_menu);
+
+	texture_win.loadFromFile("image/win.jpg");
+	texture_win.setSmooth(true);
+	Sprite_win.setTexture(texture_win);
+
+	texture_lose.loadFromFile("image/lose.jpg");
+	texture_lose.setSmooth(true);
+	Sprite_lose.setTexture(texture_lose);
+
+	texture_stark.loadFromFile("image/pvp_stark.jpg");
+	texture_stark.setSmooth(true);
+	Sprite_stark.setTexture(texture_stark);
+
+	texture_lannister.loadFromFile("image/pvp_lannister.jpg");
+	texture_lannister.setSmooth(true);
+	Sprite_lannister.setTexture(texture_lannister);
+
+
+	Pole.loadFromFile("image/reset.png");
+	DamkaB.loadFromFile("image/lannister_D.png");
+	DamkaC.loadFromFile("image/stark_D.png");
+}
+
+/* Wczytuje i umieszcza na planszy biale i czarne pionki */
+void Ekran::Ulozenie_Pionkow()
+{
+	Pionek.loadFromFile("image/lannister.png");
+	Pionek.setSmooth(true);
+
+	Pb1.setTexture(Pionek);
+	Pb2.setTexture(Pionek);
+	Pb3.setTexture(Pionek);
+	Pb4.setTexture(Pionek);
+	Pb5.setTexture(Pionek);
+	Pb6.setTexture(Pionek);
+	Pb7.setTexture(Pionek);
+	Pb8.setTexture(Pionek);
+	Pb9.setTexture(Pionek);
+	Pb10.setTexture(Pionek);
+	Pb11.setTexture(Pionek);
+	Pb12.setTexture(Pionek);
+
+	Pb1.setScale(1.2, 1.2);
+	Pb1.setPosition(93, 93);
+
+	Pb2.setScale(1.2, 1.2);
+	Pb2.setPosition(249, 93);
+
+	Pb3.setScale(1.2, 1.2);
+	Pb3.setPosition(403, 93);
+
+	Pb4.setScale(1.2, 1.2);
+	Pb4.setPosition(557, 93);
+
+	////////////////////////////////
+
+	Pb5.setScale(1.2, 1.2);
+	Pb5.setPosition(171, 170);
+
+	Pb6.setScale(1.2, 1.2);
+	Pb6.setPosition(325, 170);
+
+	Pb7.setScale(1.2, 1.2);
+	Pb7.setPosition(479, 170);
+
+	Pb8.setScale(1.2, 1.2);
+	Pb8.setPosition(634, 170);
+
+	///////////////////////////////////
+
+	Pb9.setScale(1.2, 1.2);
+	Pb9.setPosition(93, 247);
+
+	Pb10.setScale(1.2, 1.2);
+	Pb10.setPosition(249, 247);
+
+	Pb11.setScale(1.2, 1.2);
+	Pb11.setPosition(403, 247);
+
+	Pb12.setScale(1.2, 1.2);
+	Pb12.setPosition(557, 247);
+
+	//////////////////////////////////////////////////////////////////////////////////
+
+	PionekC.loadFromFile("image/stark.png");
+	PionekC.setSmooth(true);
+
+	Pc1.setTexture(PionekC);
+	Pc2.setTexture(PionekC);
+	Pc3.setTexture(PionekC);
+	Pc4.setTexture(PionekC);
+	Pc5.setTexture(PionekC);
+	Pc6.setTexture(PionekC);
+	Pc7.setTexture(PionekC);
+	Pc8.setTexture(PionekC);
+	Pc9.setTexture(PionekC);
+	Pc10.setTexture(PionekC);
+	Pc11.setTexture(PionekC);
+	Pc12.setTexture(PionekC);
+
+	Pc1.setScale(1.2, 1.2);
+	Pc1.setPosition(634, 634);
+
+	Pc2.setScale(1.2, 1.2);
+	Pc2.setPosition(479, 634);
+
+	Pc3.setScale(1.2, 1.2);
+	Pc3.setPosition(325, 634);
+
+	Pc4.setScale(1.2, 1.2);
+	Pc4.setPosition(171, 634);
+
+	////////////////////////////////
+
+	Pc5.setScale(1.2, 1.2);
+	Pc5.setPosition(557, 557);
+
+	Pc6.setScale(1.2, 1.2);
+	Pc6.setPosition(403, 557);
+
+	Pc7.setScale(1.2, 1.2);
+	Pc7.setPosition(249, 557);
+
+	Pc8.setScale(1.2, 1.2);
+	Pc8.setPosition(93, 557);
+
+	///////////////////////////////////
+
+	Pc9.setScale(1.2, 1.2);
+	Pc9.setPosition(634, 480);
+
+	Pc10.setScale(1.2, 1.2);
+	Pc10.setPosition(479, 480);
+
+	Pc11.setScale(1.2, 1.2);
+	Pc11.setPosition(325, 480);
+
+	Pc12.setScale(1.2, 1.2);
+	Pc12.setPosition(171, 480);
+}
+
+
+
+#endif WYSWIETLANIE_H
+#pragma once

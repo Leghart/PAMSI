@@ -1,0 +1,52 @@
+﻿  main.cpp
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(93): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(96): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(99): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(102): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(107): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(110): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(113): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(116): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(121): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(124): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(127): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(130): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(151): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(154): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(157): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(160): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(165): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(168): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(171): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(174): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(179): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(182): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(185): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(188): warning C4305: "argument": obcięcie z "double" do "float"
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(898): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(904): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(910): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(916): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(922): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(928): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(934): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(940): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(946): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(952): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(958): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(964): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(970): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(978): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(984): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(990): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(996): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(1002): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(1008): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(1014): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(1020): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(1026): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(1032): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(1038): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\main.cpp(654): warning C4715: "ZwrocY”: niewszystkie ścieżki kodu zwracają wartość
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\main.cpp(667): warning C4715: "ZwrocX”: niewszystkie ścieżki kodu zwracają wartość
+  Warcaby_GoT.vcxproj -> C:\Users\Leghart\Desktop\PWR\PAMSI\Warcaby_Final_Version\Debug\Warcaby_GoT.exe
