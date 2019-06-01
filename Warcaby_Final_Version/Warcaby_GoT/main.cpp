@@ -608,20 +608,23 @@ int Menu() {
 	a 0 zatrzymuja jej prace	*/
 int main() {
 	char znak;
-	cout << "!!! Wszytskie utwory muzyczne i grafiki zostaly zaimplementowane na uzytek wlasny a\n nie w celach komercyjnych !!!" << endl;
-	cout << "Czy chcesz wyswietlic instukcje obslugi? (y/n):";
-	cin >> znak;
-	if (znak == 'y' || znak == 'Y') {
-		cout <<endl<< "************ NSTRUKCJA GRY W WARCABY ****************" << endl;
-		cout << " Ta wersja gry dziala nastepujaco: aby ruszac sie pionkami nalezy wybrac pionka do ruchu LPM\n a nastepnie wybrac pole w ktore ma sie poruszyc PPM." << endl;
-		cout << " To samo tyczy sie bicia wroga." << endl;
-		cout << " ******************* OGOLNE ZALOZENIE I ZASADY *******************" << endl;
-		cout << " -pionki nie moga ruszac sie do tylu chyba ze maja mozliwe bicie" << endl;
-		cout << " -nie ma przymusowego bicia" << endl;
-		cout << " -mozna wyknoac wielokrotne bicie" << endl;
-		cout << " -damka moze poruszac sie o dowolna ilosc pol do napotkania wroga (po jego zbiciu mozliwe jest wielokrotne bicie\n w odl max 1 pola" << endl;
-		cout << " -aby wykonac wielokrotne bicie nalezy wybrac pionka ktory bedzie bil a nastepnie pionka do zbicia.\n Po zbiciu znowu nalezy wybrac pionka ktorym wykonywany byl ruch i zbic kolejnego" << endl;
-		cout << endl << "Nalezy pamietac ze gra jest ciagle w wersji alfa i moga wystepowac pewne bledy i niedopracowania" << endl;
+	//instrukcja obslugi
+	{
+		cout << "!!! Wszytskie utwory muzyczne i grafiki zostaly zaimplementowane na uzytek wlasny a\n nie w celach komercyjnych !!!" << endl;
+		cout << "Czy chcesz wyswietlic instukcje obslugi? (y/n):";
+		cin >> znak;
+		if (znak == 'y' || znak == 'Y') {
+			cout << endl << "************ NSTRUKCJA GRY W WARCABY ****************" << endl;
+			cout << " Ta wersja gry dziala nastepujaco: aby ruszac sie pionkami nalezy wybrac pionka do ruchu LPM\n a nastepnie wybrac pole w ktore ma sie poruszyc PPM." << endl;
+			cout << " To samo tyczy sie bicia wroga." << endl;
+			cout << " ******************* OGOLNE ZALOZENIE I ZASADY *******************" << endl;
+			cout << " -pionki nie moga ruszac sie do tylu chyba ze maja mozliwe bicie" << endl;
+			cout << " -nie ma przymusowego bicia" << endl;
+			cout << " -mozna wyknoac wielokrotne bicie" << endl;
+			cout << " -damka moze poruszac sie o dowolna ilosc pol do napotkania wroga (po jego zbiciu mozliwe jest wielokrotne bicie\n w odl max 1 pola" << endl;
+			cout << " -aby wykonac wielokrotne bicie nalezy wybrac pionka ktory bedzie bil a nastepnie pionka do zbicia.\n Po zbiciu znowu nalezy wybrac pionka ktorym wykonywany byl ruch i zbic kolejnego" << endl;
+			cout << endl << "Nalezy pamietac ze gra jest ciagle w wersji alfa i moga wystepowac pewne bledy i niedopracowania" << endl;
+		}
 	}
 
 	//petla gry

@@ -215,6 +215,20 @@ void AI::Koncowy_Ruch(Arena &A) {
 					punkty++; //jako ze bicie ma najwieksza wage to jak tu sie wejdzie to bedzie ok
 				}
 			}
+
+			//ruch dla damki
+			if (A.tablica[i][j] == 'X'){
+				if (waga < Mozliwe_Bicie_AI_Damka(i, j, A)){
+					waga = TabBicieD[2];
+					TabKoniec[0] = i;
+					TabKoniec[1] = j;
+					TabKoniec[2] = TabBicieD[0];
+					TabKoniec[3] = TabBicieD[1];
+
+					punkty++; 
+				}
+			}
+
 			TabRuch[0] = 0;
 			TabRuch[1] = 0;
 			TabRuch[2] = 0;
@@ -224,15 +238,12 @@ void AI::Koncowy_Ruch(Arena &A) {
 			TabBicie[2] = 0;
 		}
 	}
+	//porwot do domyslnych wag
 	for (int i = 0; i < ROZ; i++) {
 		for (int j = 0; j < ROZ; j++) {
-		//	cout << tablicaWagRuchow[i][j] << " ";
 			tablicaWagRuchow[i][j] = WzorzecWag[i][j];
-			//cout << tablicaWagRuchow[i][j] << " ";
 		}
-		//cout << endl;
 	}
-//	system("pause");
 }
 
 /* zwraca cyfre int ktora odzwierciedla kierunek bicia */
@@ -314,14 +325,10 @@ int AI::Mozliwe_Bicie_AI_Damka(int xp, int yp, Arena &A)
 
 	if (A.tablica[xp][yp] == 'X')
 	{
-		cout << A.licznik << endl;
-		//system("pause");
 		switch (A.Czy_Mozliwe_Bicie_Damka(xp, yp))
 		{
 		case 1:
 		{
-			cout << "1" << endl;
-			//system("pause");
 			wagakoncowa = 200;
 
 			for (int i = 0; i <= A.licznik; i++)
@@ -337,8 +344,6 @@ int AI::Mozliwe_Bicie_AI_Damka(int xp, int yp, Arena &A)
 
 		case 2:
 		{
-			cout << "2" << endl;
-			//system("pause");
 			wagakoncowa = 200;
 
 			for (int i = 0; i <= A.licznik; i++)
@@ -354,8 +359,6 @@ int AI::Mozliwe_Bicie_AI_Damka(int xp, int yp, Arena &A)
 
 		case 3:
 		{
-			cout << "3" << endl;
-			//system("pause");
 			wagakoncowa = 200;
 			for (int i = 0; i <= A.licznik; i++)
 			{
@@ -370,8 +373,6 @@ int AI::Mozliwe_Bicie_AI_Damka(int xp, int yp, Arena &A)
 
 		case 4:
 		{
-			cout << "4" << endl;
-			//system("pause");
 			wagakoncowa = 200;
 			for (int i = 0; i <= A.licznik; i++)
 			{
@@ -394,7 +395,6 @@ int AI::Mozliwe_Bicie_AI_Damka(int xp, int yp, Arena &A)
 		break;
 		}
 	}
-
 	return wagakoncowa;
 }
 
