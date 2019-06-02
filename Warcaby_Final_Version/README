@@ -1,3 +1,6 @@
 Aby uruchmomic warcaby w trybie graficznym trzeba skonfigurowac SFML. Instrukcja jak to zrobic zostala podana ponizej:
 -pobranie i intsalacja SFML:  http://cpp0x.pl/kursy/Kurs-SFML-2-x-C++/Instalacja-i-konfiguracja/Instalacja-biblioteki-SFML-2-0/461
 -konfiguracja SFML:   http://cpp0x.pl/kursy/Kurs-SFML-2-x-C++/Instalacja-i-konfiguracja/Konfiguracja-SFML-2-0-Visual-C++/463
+
+EDIT.1
+-wystraczy zmienic lokalizacje plikow inlcude i lib w ustawieniach projektu alby byly zgodne ze sciezka katalogu w ktorym sie znajduje folder SFML
