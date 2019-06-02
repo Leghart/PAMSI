@@ -23,9 +23,8 @@ c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(179
 c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(182): warning C4305: "argument": obcięcie z "double" do "float"
 c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(185): warning C4305: "argument": obcięcie z "double" do "float"
 c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\ekran.h(188): warning C4305: "argument": obcięcie z "double" do "float"
-c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(373): warning C4101: "pomy": lokalna zmienna, do której nie istnieje odwołanie
-c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(373): warning C4101: "pomx": lokalna zmienna, do której nie istnieje odwołanie
-c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(849): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(381): warning C4101: "pomy": lokalna zmienna, do której nie istnieje odwołanie
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(381): warning C4101: "pomx": lokalna zmienna, do której nie istnieje odwołanie
 c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(855): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
 c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(861): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
 c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(867): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
@@ -49,6 +48,7 @@ c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(969
 c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(975): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
 c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(981): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
 c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(987): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\main.cpp(650): warning C4715: "ZwrocY”: niewszystkie ścieżki kodu zwracają wartość
-c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\main.cpp(663): warning C4715: "ZwrocX”: niewszystkie ścieżki kodu zwracają wartość
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\arena.h(993): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\main.cpp(678): warning C4715: "ZwrocY”: niewszystkie ścieżki kodu zwracają wartość
+c:\users\leghart\desktop\pwr\pamsi\warcaby_final_version\warcaby_got\main.cpp(691): warning C4715: "ZwrocX”: niewszystkie ścieżki kodu zwracają wartość
   Warcaby_GoT.vcxproj -> C:\Users\Leghart\Desktop\PWR\PAMSI\Warcaby_Final_Version\Debug\Warcaby_GoT.exe

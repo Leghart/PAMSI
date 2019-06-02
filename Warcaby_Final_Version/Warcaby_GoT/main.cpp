@@ -9,13 +9,13 @@
 #include "Arena.h"
 #include "AI.h"
 using namespace std;
-// pobrac xp yp i dodac do niego wektor i bedzie if(tablcia[xp+w][yp+w]==X)
 
-/* Zamiana wspolrzednych na plaszny na wygondy uklad odniesienia*/
+/* PROTOTYPY: Zamiana wspolrzednych na plaszny na wygodnyy uklad odniesienia i menu*/
 int ZwrocX(int);
 char ZwrocY(int);
 int Menu();
 
+/* Tryb gry umozliwiacjacy pojedynek ze sztuczna inteligencja */
 int Gracz_vs_SI(Ekran &E, Arena &A, AI& AI) {
 	/* zmienne startowe*/
 	int x, y, gracz = 1, xk, yk, xp, yp;
@@ -24,7 +24,6 @@ int Gracz_vs_SI(Ekran &E, Arena &A, AI& AI) {
 	int bicie = 0;
 	int punkty = 0;
 	int pkt_si = 0;
-	int wynik_gry = 0;
 
 	sf::RenderWindow oknoAplikacji(sf::VideoMode(800, 800, 32), "Warcaby");
 
@@ -63,6 +62,7 @@ int Gracz_vs_SI(Ekran &E, Arena &A, AI& AI) {
 				Czy_Prawy = true;
 			}
 
+			/* jesli zostaly klikniete LPM i PPM */
 			if (Czy_Lewy == true && Czy_Prawy == true) {
 				wysw = false;
 				bicie = 0;
@@ -81,26 +81,30 @@ int Gracz_vs_SI(Ekran &E, Arena &A, AI& AI) {
 					bicie++;
 					punkty++;
 					switch (A.Kierunek_Bicia(pom)) { // to w zaleznosci w jakim kierunku jest oblicz nowe polozenie pionka
-					case 0: {
+					case 0: 
+					{
 						pom[1] = ((int)yk - 65) - ((int)y - 65) - 1;
 						pom[0] = xk - x - 1;
 					}
-							break;
-					case 1: {
+						break;
+					case 1: 
+					{
 						pom[1] = ((int)yk - 65) - ((int)y - 65) + 1;
 						pom[0] = xk - x - 1;
 					}
-							break;
-					case 2: {
+						break;
+					case 2: 
+					{
 						pom[1] = ((int)yk - 65) - ((int)y - 65) - 1;
 						pom[0] = xk - x + 1;
 					}
-							break;
-					case 3: {
+						break;
+					case 3: 
+					{
 						pom[1] = ((int)yk - 65) - ((int)y - 65) + 1;
 						pom[0] = xk - x + 1;
 					}
-							break;
+						break;
 					}
 					/* aktualizacja polozenia*/
 					yp = ((int)y - 65) + pom[1];
@@ -110,6 +114,8 @@ int Gracz_vs_SI(Ekran &E, Arena &A, AI& AI) {
 
 				//po zbiciu wszystkich pionkow si
 				if (bicie == 0 || (bicie > 0 && !A.Czy_Mozliwe_Bicie(xp, yp))) {
+					if (wynik == -1) break; //aby nie tracic tury
+
 					if (punkty == 12) {
 						oknoAplikacji.close();
 
@@ -120,7 +126,7 @@ int Gracz_vs_SI(Ekran &E, Arena &A, AI& AI) {
 							sf::Event zdarzenie;
 							while (oknoAplikacji.pollEvent(zdarzenie)) {
 
-								//obsluga przycisku								
+								//obsluga LPM								
 								if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Left)
 								{
 									x = zdarzenie.mouseButton.x;
@@ -139,6 +145,7 @@ int Gracz_vs_SI(Ekran &E, Arena &A, AI& AI) {
 									}
 								}
 
+								/* obsluga przyciskow*/
 								if (Czy_Lewy == true) {
 									//zakoncz
 									if (x > 66 && x < 202 && y > 280 && y < 335) {
@@ -162,7 +169,7 @@ int Gracz_vs_SI(Ekran &E, Arena &A, AI& AI) {
 					gracz++;
 
 					/* tura SI*/
-					int zbity = 0, Wektor_Przesuniecia[2];
+					int zbity = 0, Wektor_Przesuniecia[2], korekta[2] = { 0,0 };
 					do
 					{
 						int punktypoprz = AI.Zwroc_punkty();
@@ -174,7 +181,28 @@ int Gracz_vs_SI(Ekran &E, Arena &A, AI& AI) {
 
 						Wektor_Przesuniecia[0] = AI.TabKoniec[2] - AI.TabKoniec[0];
 						Wektor_Przesuniecia[1] = AI.TabKoniec[3] - AI.TabKoniec[1];
-					} while (zbity > 0 && A.Czy_Mozliwe_Bicie(AI.TabKoniec[2] + Wektor_Przesuniecia[0], AI.TabKoniec[3] + Wektor_Przesuniecia[1]));
+
+						/* korekta wektoru przesuniecia */
+						{
+							if (Wektor_Przesuniecia[0] < 0 && Wektor_Przesuniecia[1] < 0) {
+								korekta[0] = -1;
+								korekta[1] = -1;
+							}
+							else if (Wektor_Przesuniecia[0] < 0 && Wektor_Przesuniecia[1] > 0) {
+								korekta[0] = -1;
+								korekta[1] = 1;
+							}
+							else if (Wektor_Przesuniecia[0] > 0 && Wektor_Przesuniecia[1] > 0) {
+								korekta[0] = 1;
+								korekta[1] = 1;
+							}
+							else if (Wektor_Przesuniecia[0] > 0 && Wektor_Przesuniecia[1] < 0) {
+								korekta[0] = 1;
+								korekta[1] = -1;
+							}
+						}
+
+					} while (zbity > 0 && A.Czy_Mozliwe_Bicie(AI.TabKoniec[0] + Wektor_Przesuniecia[0]+korekta[0], AI.TabKoniec[1] + Wektor_Przesuniecia[1]+korekta[1]));
 
 					gracz--;
 
@@ -188,7 +216,7 @@ int Gracz_vs_SI(Ekran &E, Arena &A, AI& AI) {
 							sf::Event zdarzenie;
 							while (oknoAplikacji.pollEvent(zdarzenie)) {
 
-								//obsluga przycisku								
+								//obsluga LPM							
 								if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Left)
 								{
 									x = zdarzenie.mouseButton.x;
@@ -208,6 +236,7 @@ int Gracz_vs_SI(Ekran &E, Arena &A, AI& AI) {
 									}
 								}
 
+								/* obsluga przyciskow */
 								if (Czy_Lewy == true) {
 									//zakoncz
 									if (x > 530 && x < 680 && y > 240 && y < 300) {
@@ -267,6 +296,8 @@ int Gracz_vs_SI(Ekran &E, Arena &A, AI& AI) {
 	}
 	return 0;
 }
+
+/* Tryb gry umozliwiajacy gre dwoch graczy (w przyszlosci przewidziane lacze prze internet) */
 int Gracz_vs_Gracz(Ekran &E, Arena &A) {
 	/* zmienne startowe*/
 	int x, y, gracz = 1, xk, yk, xp, yp;
@@ -274,7 +305,6 @@ int Gracz_vs_Gracz(Ekran &E, Arena &A) {
 	bool Czy_Lewy = false, Czy_Prawy = false, wysw = false;;
 	int bicie = 0;
 	int punkty1 = 0, punkty2 = 0;
-	int pomgracz;
 	string Gracz[2] = { "Stark","Lannister" };
 
 	sf::RenderWindow oknoAplikacji(sf::VideoMode(800, 800, 32), "Warcaby");
@@ -289,8 +319,6 @@ int Gracz_vs_Gracz(Ekran &E, Arena &A) {
 			wysw = true;
 		}
 		sf::Event zdarzenie;
-
-		pomgracz = gracz;
 
 		while (oknoAplikacji.pollEvent(zdarzenie)) {
 			/* warunki zamykajace okno aplikacji*/
@@ -327,6 +355,7 @@ int Gracz_vs_Gracz(Ekran &E, Arena &A) {
 				Czy_Prawy = true;
 			}
 
+			/* jesli zostaly klikniete LPM i PPM */
 			if (Czy_Lewy == true && Czy_Prawy == true) {
 				wysw = false;
 				bicie = 0;
@@ -338,45 +367,46 @@ int Gracz_vs_Gracz(Ekran &E, Arena &A) {
 				pom[1] = ((int)yk - 65) - ((int)y - 65);
 				pom[0] = xk - x;
 
-				int wynik = A.Przesun_Pionek(x, (int)y - 65, xk, (int)yk - 65, gracz, E);
-				pomgracz = gracz;
+				int wynik = A.Przesun_Pionek(x, (int)y - 65, xk, (int)yk - 65, gracz, E); 
 
 				/* jesli mozliwy ruch */
-				if (wynik == 1)
-				{
+				if (wynik == 1){
 					bicie++;
 					if (gracz == 1) punkty1++;
 					else punkty2++;
 
 					switch (A.Kierunek_Bicia(pom)) { // to w zaleznosci w jakim kierunku jest oblicz nowe polozenie pionka
-					case 0: {
+					case 0: 
+					{
 						pom[1] = ((int)yk - 65) - ((int)y - 65) - 1;
 						pom[0] = xk - x - 1;
 					}
-							break;
-					case 1: {
+						break;
+					case 1: 
+					{
 						pom[1] = ((int)yk - 65) - ((int)y - 65) + 1;
 						pom[0] = xk - x - 1;
 					}
-							break;
-					case 2: {
+						break;
+					case 2: 
+					{
 						pom[1] = ((int)yk - 65) - ((int)y - 65) - 1;
 						pom[0] = xk - x + 1;
 					}
-							break;
-					case 3: {
+						break;
+					case 3: 
+					{
 						pom[1] = ((int)yk - 65) - ((int)y - 65) + 1;
 						pom[0] = xk - x + 1;
 					}
-							break;
+						break;
 					}
 					/* aktualizacja polozenia*/
 					yp = ((int)y - 65) + pom[1];
 					xp = x + pom[0];
 				}
 
-				pomgracz = gracz;
-				if (punkty1 == 12) { //rozdzielic
+				if (punkty1 == 12) {
 					oknoAplikacji.close();
 					/********************** Ekran zwyciestwa Stark *******************************/
 					sf::RenderWindow oknoAplikacji(sf::VideoMode(800, 800, 32), "Wygrana");
@@ -385,7 +415,7 @@ int Gracz_vs_Gracz(Ekran &E, Arena &A) {
 						sf::Event zdarzenie;
 						while (oknoAplikacji.pollEvent(zdarzenie)) {
 
-							//obsluga przycisku								
+							//obsluga LPM							
 							if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Left)
 							{
 								x = zdarzenie.mouseButton.x;
@@ -404,6 +434,7 @@ int Gracz_vs_Gracz(Ekran &E, Arena &A) {
 								}
 							}
 
+							//obsluga przyciskow
 							if (Czy_Lewy == true) {
 								//zakoncz
 								if (x > 10 && x < 140 && y > 680 && y < 750) {
@@ -432,7 +463,7 @@ int Gracz_vs_Gracz(Ekran &E, Arena &A) {
 						sf::Event zdarzenie;
 						while (oknoAplikacji.pollEvent(zdarzenie)) {
 
-							//obsluga przycisku								
+							//obsluga LMP								
 							if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Left)
 							{
 								x = zdarzenie.mouseButton.x;
@@ -451,6 +482,7 @@ int Gracz_vs_Gracz(Ekran &E, Arena &A) {
 								}
 							}
 
+							//obsluga przycisku
 							if (Czy_Lewy == true) {
 								//zakoncz
 								if (x > 6 && x < 115 && y > 700 && y < 750) {
@@ -472,25 +504,19 @@ int Gracz_vs_Gracz(Ekran &E, Arena &A) {
 				}
 
 				//Zmiana gracza
-
 				if (bicie == 0 && wynik != -1) { // Ruch zwyk³y bez bicia
-
 					if (gracz == 1) gracz++;
 					else gracz--;
 				}
 				else if ((!A.Czy_Mozliwe_Bicie(xp, yp) || !A.Czy_Mozliwe_Bicie_Damka(xp, yp)) && wynik != -1) { // Czy mozliwe jest dalsze bicie
-
 					if (gracz == 1) gracz++;
 					else gracz--;
 				}
 			}
 		}
-		/* odswiez ulozenie pinkow na planszy*/ // w petli
+		/* odswiez ulozenie pinkow na planszy*/ 
 		{
 			oknoAplikacji.draw(E.Sprite_plansza);
-			for (int i = 0; i < 24; i++) {
-
-			}
 			oknoAplikacji.draw(E.Pb1);
 			oknoAplikacji.draw(E.Pb2);
 			oknoAplikacji.draw(E.Pb3);
@@ -521,6 +547,8 @@ int Gracz_vs_Gracz(Ekran &E, Arena &A) {
 	}
 	return 0;
 }
+
+/* Menu sluzoce wyborowi trybow gry i zalaczajace muzyke*/
 int Menu() {
 	Ekran E;
 	Arena A;
@@ -564,11 +592,14 @@ int Menu() {
 					return 0;
 				}
 			}
+
+			//obsluga LPM
 			if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Left) {
 				xpom = zdarzenie.mouseButton.x;
 				ypom = zdarzenie.mouseButton.y;
 				Czy_Lewy = true;
 			}
+			
 			//obsluga przyciskow
 			{
 				if (Czy_Lewy == true) {
@@ -604,16 +635,17 @@ int Menu() {
 	return 0;
 }
 
-/* wszytskie 1 zwracane przez funkcje kontunuuja prace petli
+
+/* wszystkie 1 zwracane przez funkcje kontunuuja prace petli
 	a 0 zatrzymuja jej prace	*/
 int main() {
-	char znak;
+	string znak;
 	//instrukcja obslugi
 	{
 		cout << "!!! Wszytskie utwory muzyczne i grafiki zostaly zaimplementowane na uzytek wlasny a\n nie w celach komercyjnych !!!" << endl;
-		cout << "Czy chcesz wyswietlic instukcje obslugi? (y/n):";
+		cout << "Czy chcesz wyswietlic instukcje obslugi? (y):";
 		cin >> znak;
-		if (znak == 'y' || znak == 'Y') {
+		if (znak == "y" || znak == "Y") {
 			cout << endl << "************ NSTRUKCJA GRY W WARCABY ****************" << endl;
 			cout << " Ta wersja gry dziala nastepujaco: aby ruszac sie pionkami nalezy wybrac pionka do ruchu LPM\n a nastepnie wybrac pole w ktore ma sie poruszyc PPM." << endl;
 			cout << " To samo tyczy sie bicia wroga." << endl;

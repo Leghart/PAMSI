@@ -202,42 +202,50 @@ int Arena::Czy_Mozliwe_Bicie_Damka(int x1, int y1)
 
 	int x = x1, y = y1;
 
-	while (x + LUp[0] != 7 && x + LUp[0] != 0 && y + LUp[1] != 7 && y + LUp[1] != 0 && !Czy_Jest_Pionek(x + LUp[0], y + LUp[1])) {
+	licznik = 0;
+	while (x + LUp[0] < 7 && x + LUp[0] > 0 && y + LUp[1] < 7 && y + LUp[1] > 0 && !Czy_Jest_Pionek(x + LUp[0], y + LUp[1])) {
 		x += LUp[0];
 		y += LUp[1];
+		licznik++;
 	}
 
-	if (x + LUp[0] != 7 && x + LUp[0] != 0 && y + LUp[1] != 7 && y + LUp[1] != 0 &&
+	if (x + LUp[0] < 7 && x + LUp[0] > 0 && y + LUp[1] < 7 && y + LUp[1] > 0 &&
 		Czy_Jest_W_Arenie(x + LUp[0], y + LUp[1]) && !Czy_Jest_Pionek(x + LUp[0] - 1, y + LUp[1] - 1))
-		if (!Czy_Przyjaciel_Damki(x, y, x + LUp[0], y + LUp[1]) && Czy_Jest_Pionek(x + LUp[0], y + LUp[1])) return 1;
+		if (!Czy_Przyjaciel_Damki(x1, y1, x + LUp[0], y + LUp[1]) && Czy_Jest_Pionek(x + LUp[0], y + LUp[1])) return 1;
 	x = x1, y = y1;
 
-	while (x + RUp[0] != 7 && x + RUp[0] != 0 && y + RUp[1] != 7 && y + RUp[1] != 0 && !Czy_Jest_Pionek(x + RUp[0], y + RUp[1])) {
+	licznik = 0;
+	while (x + RUp[0] < 7 && x + RUp[0] > 0 && y + RUp[1] < 7 && y + RUp[1] > 0 && !Czy_Jest_Pionek(x + RUp[0], y + RUp[1])) {
 		x += RUp[0];
 		y += RUp[1];
+		licznik++;
 	}
-	if (x + RUp[0] != 7 && x + RUp[0] != 0 && y + RUp[1] != 7 && y + RUp[1] != 0 &&
+	if (x + RUp[0] < 7 && x + RUp[0] > 0 && y + RUp[1] < 7 && y + RUp[1] > 0 &&
 		Czy_Jest_W_Arenie(x + RUp[0], y + RUp[1]) && !Czy_Jest_Pionek(x + RUp[0] - 1, y + RUp[1] + 1))
-		if (!Czy_Przyjaciel_Damki(x, y, x + RUp[0], y + RUp[1]) && Czy_Jest_Pionek(x + RUp[0], y + RUp[1])) return 2;
+		if (!Czy_Przyjaciel_Damki(x1, y1, x + RUp[0], y + RUp[1]) && Czy_Jest_Pionek(x + RUp[0], y + RUp[1])) return 2;
 	x = x1, y = y1;
 
-	while (x + RDown[0] != 7 && x + RDown[0] != 0 && y + RDown[1] != 7 && y + RDown[1] != 0 && !Czy_Jest_Pionek(x + RDown[0], y + RDown[1])) {
+	licznik = 0;
+	while (x + RDown[0] < 7 && x + RDown[0] > 0 && y + RDown[1] < 7 && y + RDown[1] > 0 && !Czy_Jest_Pionek(x + RDown[0], y + RDown[1])) {
 		x += RDown[0];
 		y += RDown[1];
+		licznik++;
 	}
 
-	if (x + RDown[0] != 7 && x + RDown[0] != 0 && y + RDown[1] != 7 && y + RDown[1] != 0 &&
+	if (x + RDown[0] < 7 && x + RDown[0] > 0 && y + RDown[1] < 7 && y + RDown[1] > 0 &&
 		Czy_Jest_W_Arenie(x + RDown[0], y + RDown[1]) && !Czy_Jest_Pionek(x + RDown[0] + 1, y + RDown[1] + 1))
-		if (!Czy_Przyjaciel_Damki(x, y, x + RDown[0], y + RDown[1]) && Czy_Jest_Pionek(x + RDown[0], y + RDown[1])) return 3;
+		if (!Czy_Przyjaciel_Damki(x1, y1, x + RDown[0], y + RDown[1]) && Czy_Jest_Pionek(x + RDown[0], y + RDown[1])) return 3;
 	x = x1, y = y1;
 
-	while (x + LDown[0] != 7 && x + LDown[0] != 0 && y + LDown[1] != 7 && y + LDown[1] != 0 && !Czy_Jest_Pionek(x + LDown[0], y + LDown[1])) {
+	licznik = 0;
+	while (x + LDown[0] < 7 && x + LDown[0] > 0 && y + LDown[1] < 7 && y + LDown[1] > 0 && !Czy_Jest_Pionek(x + LDown[0], y + LDown[1])) {
 		x += LDown[0];
 		y += LDown[1];
+		licznik++;
 	}
-	if (x + LDown[0] != 7 && x + LDown[0] != 0 && y + LDown[1] != 7 && y + LDown[1] != 0 &&
+	if (x + LDown[0] < 7 && x + LDown[0] > 0 && y + LDown[1] < 7 && y + LDown[1] > 0 &&
 		Czy_Jest_W_Arenie(x + LDown[0], y + LDown[1]) && !Czy_Jest_Pionek(x + LDown[0] + 1, y + LDown[1] - 1))
-		if (!Czy_Przyjaciel_Damki(x, y, x + LDown[0], y + LDown[1]) && Czy_Jest_Pionek(x + LDown[0], y + LDown[1])) return 4;
+		if (!Czy_Przyjaciel_Damki(x1, y1, x + LDown[0], y + LDown[1]) && Czy_Jest_Pionek(x + LDown[0], y + LDown[1])) return 4;
 
 	return -1;
 }
@@ -473,9 +481,7 @@ void Arena::Zamien_SFML(int xk, int yk, Ekran& E1)
 	}
 }
 
-
-
-/* glowne poruszanie pionkami w tym damkami*/ 
+/* glowne poruszanie pionkami w tym damkami zwraca (1-powodzenie,-1 -niepowodzenie, 0 w sfml) */ 
 int Arena::Przesun_Pionek(int x1, int y1, int x2, int y2, int gracz, Ekran &E){
 	pom[0] = x2 - x1;
 	pom[1] = y2 - y1;
@@ -676,7 +682,7 @@ int Arena::Przesun_Pionek(int x1, int y1, int x2, int y2, int gracz, Ekran &E){
 
 					Zamien_SFML(x2, y2, E);
 					Zamien(tablica[x2][y2], x2, y2);
-					return 0;
+					return 0; //WATCHOUT
 				}
 			}
 			else { // wykryto ruch w tyl
