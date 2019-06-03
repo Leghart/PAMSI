@@ -9,7 +9,6 @@ using namespace std;
 class Arena{
 public:
 	char **tablica;
-	int **wagi;
 	string **znaki;
 	int **Tab_Rozx;
 	int **Tab_Rozy;
@@ -35,6 +34,7 @@ public:
 	bool Czy_Przyjaciel_Damki(int, int, int, int);
 	bool Czy_Ruch_W_Tyl(int[], char);
 	bool Czy_Droga_Wolna(int, int, int, int);
+	bool Czy_Brak_Ruchu(int,int,int);
 
 	// wersja SFML
 	void Animacja(int, int, int, int, Ekran&);
@@ -48,7 +48,6 @@ public:
 /* inicjacja zmiennych + rozmieszczenie pionkow na terminal + obliczenie pozycji SFML */
 Arena::Arena(){
 	tablica = new char *[ROZ];
-	wagi = new int *[ROZ];
 	znaki = new string *[ROZ];
 	Tab_Rozx = new int *[ROZ];
 	Tab_Rozy = new int *[ROZ];
@@ -57,31 +56,29 @@ Arena::Arena(){
 
 	for (int i = 0; i < ROZ; i++){
 		tablica[i] = new char[ROZ];
-		wagi[i] = new int[ROZ];
 		znaki[i] = new string[ROZ];
 		Tab_Rozx[i] = new int[ROZ];
 		Tab_Rozy[i] = new int[ROZ];
 	}
 
+	//zerowanie
 	for (int i = 0; i < ROZ; i++){
 		for (int j = 0; j < ROZ; j++){
 			tablica[i][j] = ' ';
-			wagi[i][j] = 0;
 			znaki[i][j] = " ";
 		}
 	}
 
+	//rozmieszczanie
 	for (int i = 0; i < 3; i += 2){
 		for (int j = 0; j < 8; j += 2){
-			tablica[i][j] = 'x';
-			wagi[i][j] = 1;
-			znaki[i][j] = poms[k++];
+			tablica[i][j] = 'x'; //terminal 
+			znaki[i][j] = poms[k++]; //sfml
 		}
 	}
 
 	for (int i = 1; i < 8; i += 2){
 		tablica[1][i] = 'x';
-		wagi[1][i] = 1;
 		znaki[1][i] = poms[k++];
 	}
 
@@ -89,14 +86,12 @@ Arena::Arena(){
 	for (int i = 5; i < 8; i += 2){
 		for (int j = 1; j < 8; j += 2){
 			tablica[i][j] = 'o';
-			wagi[i][j] = 1;
 			znaki[i][j] = poms[k++];
 		}
 	}
 
 	for (int i = 0; i < 8; i += 2){
 		tablica[6][i] = 'o';
-		wagi[6][i] = 1;
 		znaki[6][i] = poms[k++];
 	}
 
@@ -117,11 +112,9 @@ Arena::Arena(){
 Arena::~Arena(){
 	for (int i = 0; i < ROZ; i++){
 		delete[] tablica[i];
-		delete[] wagi[i];
 	}
 
 	delete[] tablica;
-	delete[] wagi;
 }
 
 /* jak nazwa metody */
@@ -365,12 +358,10 @@ bool Arena::Bicie_Damka(int x, int y, int tab[]){
 void Arena::Zamien(char znak, int x, int y){
 	if (znak == 'x' && x == 7){
 		tablica[x][y] = 'X';
-		wagi[x][y] = 2;
 	}
 
 	if (znak == 'o' && x == 0){
 		tablica[x][y] = 'O';
-		wagi[x][y] = 2;
 	}
 }
 
@@ -382,103 +373,31 @@ void Arena::Zamien_SFML(int xk, int yk, Ekran& E1)
 
 	znakpom = znaki[xk][yk];
 
-	if (wagi[xk][yk] == 1 && znakpom == "Pb1" && xk == 7)
-	{
-		E1.Pb1.setTexture(E1.DamkaB);
-	}
-	else if ((wagi[xk][yk] == 1 && znakpom == "Pb2" && xk == 7))
-	{
-		E1.Pb2.setTexture(E1.DamkaB);
-	}
-	else if ((wagi[xk][yk] == 1 && znakpom == "Pb3" && xk == 7))
-	{
-		E1.Pb3.setTexture(E1.DamkaB);
-	}
-	else if ((wagi[xk][yk] == 1 && znakpom == "Pb4" && xk == 7))
-	{
-		E1.Pb4.setTexture(E1.DamkaB);
-	}
-	else if ((wagi[xk][yk] == 1 && znakpom == "Pb5" && xk == 7))
-	{
-		E1.Pb5.setTexture(E1.DamkaB);
-	}
-	else if ((wagi[xk][yk] == 1 && znakpom == "Pb6" && xk == 7))
-	{
-		E1.Pb6.setTexture(E1.DamkaB);
-	}
-	else if ((wagi[xk][yk] == 1 && znakpom == "Pb7" && xk == 7))
-	{
-		E1.Pb7.setTexture(E1.DamkaB);
-	}
-	else if ((wagi[xk][yk] == 1 && znakpom == "Pb8" && xk == 7))
-	{
-		E1.Pb8.setTexture(E1.DamkaB);
-	}
-	else if ((wagi[xk][yk] == 1 && znakpom == "Pb9" && xk == 7))
-	{
-		E1.Pb9.setTexture(E1.DamkaB);
-	}
-	else if ((wagi[xk][yk] == 1 && znakpom == "Pb10" && xk == 7))
-	{
-		E1.Pb10.setTexture(E1.DamkaB);
-	}
-	else if ((wagi[xk][yk] == 1 && znakpom == "Pb11" && xk == 7))
-	{
-		E1.Pb11.setTexture(E1.DamkaB);
-	}
-	else if ((wagi[xk][yk] == 1 && znakpom == "Pb12" && xk == 7))
-	{
-		E1.Pb12.setTexture(E1.DamkaB);
-	}
+	if ((tablica[xk][yk]=='x' || tablica[xk][yk] == 'o') && znakpom == "Pb1" && xk == 7)	E1.Pb1.setTexture(E1.DamkaB);
+	else if (((tablica[xk][yk] == 'x' || tablica[xk][yk] == 'o') && znakpom == "Pb2" && xk == 7))	E1.Pb2.setTexture(E1.DamkaB);
+	else if (((tablica[xk][yk] == 'x' || tablica[xk][yk] == 'o') && znakpom == "Pb3" && xk == 7))	E1.Pb3.setTexture(E1.DamkaB);
+	else if (((tablica[xk][yk] == 'x' || tablica[xk][yk] == 'o') && znakpom == "Pb4" && xk == 7))	E1.Pb4.setTexture(E1.DamkaB);
+	else if (((tablica[xk][yk] == 'x' || tablica[xk][yk] == 'o') && znakpom == "Pb5" && xk == 7))	E1.Pb5.setTexture(E1.DamkaB);
+	else if (((tablica[xk][yk] == 'x' || tablica[xk][yk] == 'o') && znakpom == "Pb6" && xk == 7))	E1.Pb6.setTexture(E1.DamkaB);
+	else if (((tablica[xk][yk] == 'x' || tablica[xk][yk] == 'o') && znakpom == "Pb7" && xk == 7))	E1.Pb7.setTexture(E1.DamkaB);
+	else if (((tablica[xk][yk] == 'x' || tablica[xk][yk] == 'o') && znakpom == "Pb8" && xk == 7))	E1.Pb8.setTexture(E1.DamkaB);
+	else if (((tablica[xk][yk] == 'x' || tablica[xk][yk] == 'o') && znakpom == "Pb9" && xk == 7))	E1.Pb9.setTexture(E1.DamkaB);
+	else if (((tablica[xk][yk] == 'x' || tablica[xk][yk] == 'o') && znakpom == "Pb10" && xk == 7))	E1.Pb10.setTexture(E1.DamkaB);
+	else if (((tablica[xk][yk] == 'x' || tablica[xk][yk] == 'o') && znakpom == "Pb11" && xk == 7))	E1.Pb11.setTexture(E1.DamkaB);
+	else if (((tablica[xk][yk] == 'x' || tablica[xk][yk] == 'o') && znakpom == "Pb12" && xk == 7))	E1.Pb12.setTexture(E1.DamkaB);
 
-	else if ((wagi[xk][yk] == 1 && znakpom == "Pc1" && xk == 0))
-	{
-		E1.Pc1.setTexture(E1.DamkaC);
-	}
-	else if ((wagi[xk][yk] == 1 && znakpom == "Pc2" && xk == 0))
-	{
-		E1.Pc2.setTexture(E1.DamkaC);
-	}
-	else if ((wagi[xk][yk] == 1 && znakpom == "Pc3" && xk == 0))
-	{
-		E1.Pc3.setTexture(E1.DamkaC);
-	}
-	else if ((wagi[xk][yk] == 1 && znakpom == "Pc4" && xk == 0))
-	{
-		E1.Pc4.setTexture(E1.DamkaC);
-	}
-	else if ((wagi[xk][yk] == 1 && znakpom == "Pc5" && xk == 0))
-	{
-		E1.Pc5.setTexture(E1.DamkaC);
-	}
-	else if (wagi[xk][yk] == 1 && znakpom == "Pc6" && xk == 0)
-	{
-		E1.Pc6.setTexture(E1.DamkaC);
-	}
-	else if ((wagi[xk][yk] == 1 && znakpom == "Pc7" && xk == 0))
-	{
-		E1.Pc7.setTexture(E1.DamkaC);
-	}
-	else if ((wagi[xk][yk] == 1 && znakpom == "Pc8" && xk == 0))
-	{
-		E1.Pc8.setTexture(E1.DamkaC);
-	}
-	else if ((wagi[xk][yk] == 1 && znakpom == "Pc9" && xk == 0))
-	{
-		E1.Pc9.setTexture(E1.DamkaC);
-	}
-	else if ((wagi[xk][yk] == 1 && znakpom == "Pc10" && xk == 0))
-	{
-		E1.Pc10.setTexture(E1.DamkaC);
-	}
-	else if (wagi[xk][yk] == 1 && znakpom == "Pc11" && xk == 0)
-	{
-		E1.Pc11.setTexture(E1.DamkaC);
-	}
-	else if ((wagi[xk][yk] == 1 && znakpom == "Pc12" && xk == 0))
-	{
-		E1.Pc12.setTexture(E1.DamkaC);
-	}
+	else if (((tablica[xk][yk] == 'x' || tablica[xk][yk] == 'o') && znakpom == "Pc1" && xk == 0))	E1.Pc1.setTexture(E1.DamkaC);
+	else if (((tablica[xk][yk] == 'x' || tablica[xk][yk] == 'o') && znakpom == "Pc2" && xk == 0))	E1.Pc2.setTexture(E1.DamkaC);
+	else if (((tablica[xk][yk] == 'x' || tablica[xk][yk] == 'o') && znakpom == "Pc3" && xk == 0))	E1.Pc3.setTexture(E1.DamkaC);
+	else if (((tablica[xk][yk] == 'x' || tablica[xk][yk] == 'o') && znakpom == "Pc4" && xk == 0))	E1.Pc4.setTexture(E1.DamkaC);
+	else if (((tablica[xk][yk] == 'x' || tablica[xk][yk] == 'o') && znakpom == "Pc5" && xk == 0))	E1.Pc5.setTexture(E1.DamkaC);
+	else if (((tablica[xk][yk] == 'x' || tablica[xk][yk] == 'o') && znakpom == "Pc6" && xk == 0))	E1.Pc6.setTexture(E1.DamkaC);
+	else if (((tablica[xk][yk] == 'x' || tablica[xk][yk] == 'o') && znakpom == "Pc7" && xk == 0))	E1.Pc7.setTexture(E1.DamkaC);
+	else if (((tablica[xk][yk] == 'x' || tablica[xk][yk] == 'o') && znakpom == "Pc8" && xk == 0))	E1.Pc8.setTexture(E1.DamkaC);
+	else if (((tablica[xk][yk] == 'x' || tablica[xk][yk] == 'o') && znakpom == "Pc9" && xk == 0))	E1.Pc9.setTexture(E1.DamkaC);
+	else if (((tablica[xk][yk] == 'x' || tablica[xk][yk] == 'o') && znakpom == "Pc10" && xk == 0))	E1.Pc10.setTexture(E1.DamkaC);
+	else if (((tablica[xk][yk] == 'x' || tablica[xk][yk] == 'o') && znakpom == "Pc11" && xk == 0))	E1.Pc11.setTexture(E1.DamkaC);
+	else if (((tablica[xk][yk] == 'x' || tablica[xk][yk] == 'o') && znakpom == "Pc12" && xk == 0))	E1.Pc12.setTexture(E1.DamkaC);
 }
 
 /* glowne poruszanie pionkami w tym damkami zwraca (1-powodzenie,-1 -niepowodzenie, 0 w sfml) */ 
@@ -492,22 +411,19 @@ int Arena::Przesun_Pionek(int x1, int y1, int x2, int y2, int gracz, Ekran &E){
 			if (Czy_Jest_Pionek(x2, y2)){ // Instrukcje gdy bijemy pionki
 				if (tablica[x1][y1] == 'O' || tablica[x1][y1] == 'X'){ // Jesli pion jest damka
 					if (Bicie_Damka(x2, y2, pom)){ //jesli damka bedzie miala bicie
+						/* bicia dla damek*/
 						switch (Kierunek_Bicia(pom)){ //polecenia dla sfml i wersji na terminal
 						case 0:
-							Wyczysc_Pole(x2, y2, E);
+							Wyczysc_Pole(x2, y2, E); 
 							tablica[x2 - 1][y2 - 1] = tablica[x1][y1];
-							tablica[x1][y1] = ' ';
-							tablica[x2][y2] = ' ';
+							tablica[x1][y1] = ' '; 
+							tablica[x2][y2] = ' '; 
 
 							Animacja(x1, y1, x2 - 1, y2 - 1, E);
 
 							znaki[x2 - 1][y2 - 1] = znaki[x1][y1];
 							znaki[x1][y1] = " ";
 							znaki[x2][y2] = " ";
-
-							wagi[x2 - 1][y2 - 1] = wagi[x1][y1];
-							wagi[x1][y1] = 0;
-							wagi[x2][y2] = 0;
 						break;
 
 						case 1:
@@ -521,10 +437,6 @@ int Arena::Przesun_Pionek(int x1, int y1, int x2, int y2, int gracz, Ekran &E){
 							znaki[x2 - 1][y2 + 1] = znaki[x1][y1];
 							znaki[x1][y1] = " ";
 							znaki[x2][y2] = " ";
-
-							wagi[x2 - 1][y2 + 1] = wagi[x1][y1];
-							wagi[x1][y1] = 0;
-							wagi[x2][y2] = 0;
 
 							Animacja(x1, y1, x2, y2,E);
 						break;
@@ -541,10 +453,6 @@ int Arena::Przesun_Pionek(int x1, int y1, int x2, int y2, int gracz, Ekran &E){
 							znaki[x1][y1] = " ";
 							znaki[x2][y2] = " ";
 
-							wagi[x2 + 1][y2 - 1] = wagi[x1][y1];
-							wagi[x1][y1] = 0;
-							wagi[x2][y2] = 0;
-
 							Animacja(x1, y1, x2, y2,E);
 						break;
 
@@ -560,10 +468,6 @@ int Arena::Przesun_Pionek(int x1, int y1, int x2, int y2, int gracz, Ekran &E){
 							znaki[x1][y1] = " ";
 							znaki[x2][y2] = " ";
 
-							wagi[x2 + 1][y2 + 1] = wagi[x1][y1];
-							wagi[x1][y1] = 0;
-							wagi[x2][y2] = 0;
-
 							Animacja(x1, y1, x2, y2,E);
 						break;
 
@@ -573,9 +477,10 @@ int Arena::Przesun_Pionek(int x1, int y1, int x2, int y2, int gracz, Ekran &E){
 					else // jesli damka nie ma bicia
 						return -1;
 				}
-				else // jesli pion nie jest damka 
+				else // jesli pion jest zwyklym pionkiem
 				{
 					if (Bicie(x2, y2, pom)){
+						/* bicia dla pionkow */
 						switch (Kierunek_Bicia(pom)){
 						case 0:
 							Wyczysc_Pole(x2, y2, E);
@@ -588,10 +493,6 @@ int Arena::Przesun_Pionek(int x1, int y1, int x2, int y2, int gracz, Ekran &E){
 							znaki[x2 - 1][y2 - 1] = znaki[x1][y1];
 							znaki[x1][y1] = " ";
 							znaki[x2][y2] = " ";
-
-							wagi[x2 - 1][y2 - 1] = wagi[x1][y1];
-							wagi[x1][y1] = 0;
-							wagi[x2][y2] = 0;
 
 							Zamien_SFML(x2 - 1, y2 - 1, E);
 							Zamien(tablica[x2 - 1][y2 - 1], x2 - 1, y2 - 1);		
@@ -610,10 +511,6 @@ int Arena::Przesun_Pionek(int x1, int y1, int x2, int y2, int gracz, Ekran &E){
 							znaki[x1][y1] = " ";
 							znaki[x2][y2] = " ";
 
-							wagi[x2 - 1][y2 + 1] = wagi[x1][y1];
-							wagi[x1][y1] = 0;
-							wagi[x2][y2] = 0;
-
 							Zamien_SFML(x2 - 1, y2 + 1, E);
 							Zamien(tablica[x2 - 1][y2 + 1], x2 - 1, y2 + 1);			
 						break;
@@ -629,10 +526,6 @@ int Arena::Przesun_Pionek(int x1, int y1, int x2, int y2, int gracz, Ekran &E){
 							znaki[x2 + 1][y2 - 1] = znaki[x1][y1];
 							znaki[x1][y1] = " ";
 							znaki[x2][y2] = " ";
-
-							wagi[x2 + 1][y2 - 1] = wagi[x1][y1];
-							wagi[x1][y1] = 0;
-							wagi[x2][y2] = 0;
 
 							Zamien_SFML(x2 + 1, y2 - 1, E);
 							Zamien(tablica[x2 + 1][y2 - 1], x2 + 1, y2 - 1);
@@ -650,10 +543,6 @@ int Arena::Przesun_Pionek(int x1, int y1, int x2, int y2, int gracz, Ekran &E){
 							znaki[x1][y1] = " ";
 							znaki[x2][y2] = " ";
 
-							wagi[x2 + 1][y2 + 1] = wagi[x1][y1];
-							wagi[x1][y1] = 0;
-							wagi[x2][y2] = 0;
-
 							Zamien_SFML(x2 + 1, y2 + 1, E);
 							Zamien(tablica[x2 + 1][y2 + 1], x2 + 1, y2 + 1);
 						break;
@@ -667,22 +556,19 @@ int Arena::Przesun_Pionek(int x1, int y1, int x2, int y2, int gracz, Ekran &E){
 			else if (Czy_Ruch_W_Tyl(pom, tablica[x1][y1])) //jesli nie bylo pionka sprawdz czy gracz nie chce sie ruszyc w tyl
 			{
 				if ((tablica[x1][y1] == 'X' || tablica[x1][y1] == 'O') && !Czy_Droga_Wolna(x1, y1, x2, y2))	//zeby damka nie przenikala pionki wroga
-					return -1;				
-				else {
+					return -1;			
+
+				else { //po prostu rusz pionkiem
 					tablica[x2][y2] = tablica[x1][y1];
 					tablica[x1][y1] = ' ';
 
 					Animacja(x1, y1, x2, y2, E);
 
 					znaki[x2][y2] = znaki[x1][y1];
-					znaki[x1][y1] = " ";
-
-					wagi[x2][y2] = wagi[x1][y1];
-					wagi[x1][y1] = 0;
 
 					Zamien_SFML(x2, y2, E);
 					Zamien(tablica[x2][y2], x2, y2);
-					return 0; //WATCHOUT
+					return 0; 				
 				}
 			}
 			else { // wykryto ruch w tyl
@@ -1003,149 +889,130 @@ void Arena::Wyczysc_Pole(int xk, int yk, Ekran &E1)
 	znakpom = znaki[xk][yk];
 
 	if (znakpom == "Pb1")
-	{
-		pomx = Tab_Rozx[xk][yk];
-		pomy = Tab_Rozy[xk][yk];
 		E1.Pb1.setTexture(E1.Pole);
-	}
 	else if (znakpom == "Pb2")
-	{
-		pomx = Tab_Rozx[xk][yk];
-		pomy = Tab_Rozy[xk][yk];
 		E1.Pb2.setTexture(E1.Pole);
-	}
 	else if (znakpom == "Pb3")
-	{
-		pomx = Tab_Rozx[xk][yk];
-		pomy = Tab_Rozy[xk][yk];
 		E1.Pb3.setTexture(E1.Pole);
-	}
 	else if (znakpom == "Pb4")
-	{
-		pomx = Tab_Rozx[xk][yk];
-		pomy = Tab_Rozy[xk][yk];
 		E1.Pb4.setTexture(E1.Pole);
-	}
 	else if (znakpom == "Pb5")
-	{
-		pomx = Tab_Rozx[xk][yk];
-		pomy = Tab_Rozy[xk][yk];
 		E1.Pb5.setTexture(E1.Pole);
-	}
 	else if (znakpom == "Pb6")
-	{
-		pomx = Tab_Rozx[xk][yk];
-		pomy = Tab_Rozy[xk][yk];
 		E1.Pb6.setTexture(E1.Pole);
-	}
 	else if (znakpom == "Pb7")
-	{
-		pomx = Tab_Rozx[xk][yk];
-		pomy = Tab_Rozy[xk][yk];
 		E1.Pb7.setTexture(E1.Pole);
-	}
 	else if (znakpom == "Pb8")
-	{
-		pomx = Tab_Rozx[xk][yk];
-		pomy = Tab_Rozy[xk][yk];
 		E1.Pb8.setTexture(E1.Pole);
-	}
 	else if (znakpom == "Pb9")
-	{
-		pomx = Tab_Rozx[xk][yk];
-		pomy = Tab_Rozy[xk][yk];
 		E1.Pb9.setTexture(E1.Pole);
-	}
 	else if (znakpom == "Pb10")
-	{
-		pomx = Tab_Rozx[xk][yk];
-		pomy = Tab_Rozy[xk][yk];
 		E1.Pb10.setTexture(E1.Pole);
-	}
 	else if (znakpom == "Pb11")
-	{
-		pomx = Tab_Rozx[xk][yk];
-		pomy = Tab_Rozy[xk][yk];
 		E1.Pb11.setTexture(E1.Pole);
-	}
 	else if (znakpom == "Pb12")
-	{
-		pomx = Tab_Rozx[xk][yk];
-		pomy = Tab_Rozy[xk][yk];
 		E1.Pb12.setTexture(E1.Pole);
-	}
 	else if (znakpom == "Pc1")
-	{
-		pomx = Tab_Rozx[xk][yk];
-		pomy = Tab_Rozy[xk][yk];
 		E1.Pc1.setTexture(E1.Pole);
-	}
 	else if (znakpom == "Pc2")
-	{
-		pomx = Tab_Rozx[xk][yk];
-		pomy = Tab_Rozy[xk][yk];
 		E1.Pc2.setTexture(E1.Pole);
-	}
 	else if (znakpom == "Pc3")
-	{
-		pomx = Tab_Rozx[xk][yk];
-		pomy = Tab_Rozy[xk][yk];
 		E1.Pc3.setTexture(E1.Pole);
-	}
 	else if (znakpom == "Pc4")
-	{
-		pomx = Tab_Rozx[xk][yk];
-		pomy = Tab_Rozy[xk][yk];
 		E1.Pc4.setTexture(E1.Pole);
-	}
 	else if (znakpom == "Pc5")
-	{
-		pomx = Tab_Rozx[xk][yk];
-		pomy = Tab_Rozy[xk][yk];
 		E1.Pc5.setTexture(E1.Pole);
-	}
 	else if (znakpom == "Pc6")
-	{
-		pomx = Tab_Rozx[xk][yk];
-		pomy = Tab_Rozy[xk][yk];
 		E1.Pc6.setTexture(E1.Pole);
-	}
 	else if (znakpom == "Pc7")
-	{
-		pomx = Tab_Rozx[xk][yk];
-		pomy = Tab_Rozy[xk][yk];
 		E1.Pc7.setTexture(E1.Pole);
-	}
 	else if (znakpom == "Pc8")
-	{
-		pomx = Tab_Rozx[xk][yk];
-		pomy = Tab_Rozy[xk][yk];
 		E1.Pc8.setTexture(E1.Pole);
-	}
 	else if (znakpom == "Pc9")
-	{
-		pomx = Tab_Rozx[xk][yk];
-		pomy = Tab_Rozy[xk][yk];
 		E1.Pc9.setTexture(E1.Pole);
-	}
 	else if (znakpom == "Pc10")
-	{
-		pomx = Tab_Rozx[xk][yk];
-		pomy = Tab_Rozy[xk][yk];
 		E1.Pc10.setTexture(E1.Pole);
-	}
 	else if (znakpom == "Pc11")
-	{
-		pomx = Tab_Rozx[xk][yk];
-		pomy = Tab_Rozy[xk][yk];
 		E1.Pc11.setTexture(E1.Pole);
-	}
 	else if (znakpom == "Pc12")
-	{
-		pomx = Tab_Rozx[xk][yk];
-		pomy = Tab_Rozy[xk][yk];
 		E1.Pc12.setTexture(E1.Pole);
+}
+
+/* (Zalazek) funkcji sprawdzajacej czy mozliwy jest jakikolwiek ruch (jego brak powoduje brak mozliwosc ruchu jesli
+	pionki sa zablokowane przez wrogie piony */
+bool Arena::Czy_Brak_Ruchu(int xp, int yp, int gracz){
+	bool tmp = false;
+	if (gracz == 1){
+		for (int i = 0; i < ROZ; i++){
+			for (int j = 0; j < ROZ; j++){
+				if (tablica[i][j] == 'o' || tablica[i][j] == 'O'){
+					
+					//Ruch w lewo gora
+					if (Czy_Jest_W_Arenie(i - 1, j - 1)){
+						if (!Czy_Jest_Pionek(i - 1, j - 1))
+							return true;
+						else if (Czy_Jest_W_Arenie(i - 2, j - 2)){
+							if (!Czy_Jest_Pionek(i - 2, j - 2))
+								return true;
+							else tmp = false;
+						}
+						else tmp = false;
+					}
+					else tmp = false;
+
+					//Ruch w prawo gora
+					if (Czy_Jest_W_Arenie(i - 1, j + 1)){
+						if (!Czy_Jest_Pionek(i - 1, j + 1))
+							return true;
+						
+						else if (Czy_Jest_W_Arenie(i - 2, j + 2)){
+							if (!Czy_Jest_Pionek(i - 2, j + 2))
+								return true;
+							else tmp = false;
+						}
+						else tmp = false;
+					}
+					else tmp = false;
+				}
+			}
+		}
 	}
+
+	if (gracz == 2){
+		for (int i = 0; i < ROZ; i++){
+			for (int j = 0; j < ROZ; j++){
+				if (tablica[i][j] == 'x' || tablica[i][j] == 'X'){
+
+					//Ruch w lewo dol
+					if (Czy_Jest_W_Arenie(i + 1, j - 1)){
+						if (!Czy_Jest_Pionek(i + 1, j - 1))
+							return true;
+						else if (Czy_Jest_W_Arenie(i + 2, j - 2)){
+							if (!Czy_Jest_Pionek(i + 2, j - 2))
+								return true;
+							else tmp = false;
+						}
+						else tmp = false;
+					}
+					else tmp = false;
+
+					//Ruch w prawo dol
+					if (Czy_Jest_W_Arenie(i + 1, j + 1)){
+						if (!Czy_Jest_Pionek(i + 1, j + 1))
+							return true;
+						else if (Czy_Jest_W_Arenie(i + 2, j + 2)){
+							if (!Czy_Jest_Pionek(i + 2, j + 2))
+								return true;
+							else tmp = false;
+						}
+						else tmp = false;
+					}
+					else tmp = false;
+				}
+			}
+		}
+	}
+	return tmp;
 }
 
 #endif // !ARENA_H

@@ -16,7 +16,7 @@ public:
 	int TabKoniec[4];
 
 	AI();
-	int Zwroc_punkty() { return punkty; }
+	int Zwroc_punkty(){ return punkty; }
 	int Ilosc_Bic(int, int, Arena&);
 	int Mozliwy_Ruch_AI(int, int, Arena&);
 	int Mozliwe_Bicie_AI(int, int, Arena&);
@@ -54,9 +54,20 @@ for (int i = 0; i < 3; i++){
 	TabKoniec[i] = 0;
 }
 // oryginal wag na planszy
-for (int i = 0; i < ROZ; i++)
-	for (int j = 0; j < ROZ; j++)
+for (int i = 0; i < ROZ; i++) 
+	for (int j = 0; j < ROZ; j++) 
 		WzorzecWag[i][j] = tablicaWagRuchow[i][j];
+
+
+/* Mozna zobaczyc jak rozkladane sa domyslnie wagi pol */
+/*
+for (int i = 0; i < ROZ; i++) {
+	for (int j = 0; j < ROZ; j++) {
+		cout << tablicaWagRuchow[i][j] << " ";
+	}
+	cout << endl;
+}
+*/
 
 TabKoniec[3] = 0;
 }
@@ -120,7 +131,7 @@ int AI::Ilosc_Bic(int xp, int yp, Arena &A){
 	return bicia;
 }
 
-/* zwraca wage najlepszego ruchu (z tablicy wag) */
+/* zwraca wage najlepszego ruchu (z tablicy wag, przewiduje tylko ruchy w dol) */
 int AI::Mozliwy_Ruch_AI(int xp, int yp, Arena &A){
 	int pom2[2];
 	int wagakoncowa = 0;
@@ -150,7 +161,7 @@ int AI::Mozliwy_Ruch_AI(int xp, int yp, Arena &A){
 	return wagakoncowa;
 }
 
-/* zwraca wage bicia dla pionka (100) jesli bylo mozliwe  */
+/* zwraca wage bicia dla pionka (=100) jesli bylo mozliwe  */
 int AI::Mozliwe_Bicie_AI(int xp, int yp, Arena &A){
 	int wagakoncowa = 0;
 
@@ -189,13 +200,14 @@ int AI::Mozliwe_Bicie_AI(int xp, int yp, Arena &A){
 	return wagakoncowa;
 }
 
-/* zwraca wage bicia dla damki (200) jesli bylo mozliwe */
+/* zwraca wage bicia dla damki (=200) jesli bylo mozliwe */
 int AI::Mozliwe_Bicie_AI_Damka(int xp, int yp, Arena &A) {
 	int wagakoncowa = 0;
 
 	if (A.tablica[xp][yp] == 'X') {
 		switch (A.Czy_Mozliwe_Bicie_Damka(xp, yp)) {
-		case 1: {
+		case 1: 
+		{
 			wagakoncowa = 200;
 
 			for (int i = 0; i <= A.licznik; i++) {
@@ -206,9 +218,10 @@ int AI::Mozliwe_Bicie_AI_Damka(int xp, int yp, Arena &A) {
 			TabBicieD[1] = yp;
 			TabBicieD[2] = wagakoncowa;
 		}
-				break;
+		break;
 
-		case 2: {
+		case 2: 
+		{
 			wagakoncowa = 200;
 
 			for (int i = 0; i <= A.licznik; i++) {
@@ -219,9 +232,10 @@ int AI::Mozliwe_Bicie_AI_Damka(int xp, int yp, Arena &A) {
 			TabBicieD[1] = yp;
 			TabBicieD[2] = wagakoncowa;
 		}
-				break;
+		break;
 
-		case 3: {
+		case 3: 
+		{
 			wagakoncowa = 200;
 			for (int i = 0; i <= A.licznik; i++) {
 				xp += 1;
@@ -231,9 +245,10 @@ int AI::Mozliwe_Bicie_AI_Damka(int xp, int yp, Arena &A) {
 			TabBicieD[1] = yp;
 			TabBicieD[2] = wagakoncowa;
 		}
-				break;
+		break;
 
-		case 4: {
+		case 4: 
+		{
 			wagakoncowa = 200;
 			for (int i = 0; i <= A.licznik; i++) {
 				xp += 1;
@@ -243,27 +258,29 @@ int AI::Mozliwe_Bicie_AI_Damka(int xp, int yp, Arena &A) {
 			TabBicieD[1] = yp;
 			TabBicieD[2] = wagakoncowa;
 		}
-				break;
+		break;
 
-		case -1: {
+		case -1: 
+		{
 			wagakoncowa = -1;
 			TabBicieD[0] = xp;
 			TabBicieD[1] = yp;
 			TabBicieD[2] = wagakoncowa;
 		}
-				 break;
+		break;
 		}
 	}
 	return wagakoncowa;
 }
 
-/* przejscie po wszystkich pionach i wpisanie do tablicy najlepszego ruchu lub bicia jakie
+/* przejscie po wszystkich pionach i wpisanie do tablicy koncowej najlepszego ruchu lub bicia jakie
 	jest mozliwe do wykonania (xp,yp,xk,yk) */
 void AI::Koncowy_Ruch(Arena &A) {
 	waga = 0;
 	for (int i = ROZ-1; i >= 0; i--) {
 		for (int j = ROZ-1; j >=0; j--) {
-			if (A.tablica[i][j] == 'x') {
+			/* ruch dla pionka */
+			if (A.tablica[i][j] == 'x') { 
 				Nie_Podkladaj_Sie(i, j, A);
 				Czy_Pod_Atakiem(i, j, A);
 				if (waga < Mozliwy_Ruch_AI(i, j, A)) { //nie bylo bicia
@@ -284,8 +301,8 @@ void AI::Koncowy_Ruch(Arena &A) {
 					czybije = true;
 				}
 			}
-
-			if (A.tablica[i][j] == 'X'){ 	//ruch dla damki
+			/* ruch dla damki */
+			if (A.tablica[i][j] == 'X'){ 
 				if (waga < Mozliwe_Bicie_AI_Damka(i, j, A)){
 					waga = TabBicieD[2];
 					TabKoniec[0] = i;
@@ -305,14 +322,14 @@ void AI::Koncowy_Ruch(Arena &A) {
 			TabBicie[2] = 0;
 		}
 	}
-	if (czybije == true)	punkty++;
+	if (czybije == true)	
+		punkty++;
 
 	//porwot do domyslnych wag
-	for (int i = 0; i < ROZ; i++) {
-		for (int j = 0; j < ROZ; j++) {
+	for (int i = 0; i < ROZ; i++) 
+		for (int j = 0; j < ROZ; j++) 
 			tablicaWagRuchow[i][j] = WzorzecWag[i][j];
-		}
-	}
+
 }
 
 /* zwraca cyfre ktora odzwierciedla kierunek bicia */
@@ -340,7 +357,8 @@ int AI::Czy_Mozliwe_Bicie_AI(int x, int y, int xzabr, int yzabr,Arena& A)
 	return -1;
 }
 
-/* Sprawdza czy pion znajdzie sie pod atakiem ze strony wroga (patrzy tylko na dolne kierunki)*/
+/* Zabezpiecza sojusznika aby nie wystawial sie na atak (jesli tak to pole ktore uniemozliwia zbicie pionka
+  dostaje +50 do wagi) (patrzy tylko na dolne kierunki)*/
 void AI::Czy_Pod_Atakiem(int xp, int yp, Arena &A)
 {
 	Atak = false;
@@ -360,7 +378,8 @@ void AI::Czy_Pod_Atakiem(int xp, int yp, Arena &A)
 	}
 }
 
-/* Zabezpiecza sojusznika aby nie wystawial sie na atak*/
+/* Sprawdza czy pion znajdzie sie pod atakiem ze strony wroga (jesli zobaczy ze miejsce w ktore chce isc jest zagrozone bo dalej stoi wrog
+to pole te dostaje wage =1) */
 void AI::Nie_Podkladaj_Sie(int xp, int yp, Arena &A){
 
 	if (A.Czy_Jest_W_Arenie(xp + 1 + 1, yp + 1 + 1)){

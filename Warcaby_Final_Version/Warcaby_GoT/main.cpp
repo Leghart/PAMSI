@@ -182,7 +182,7 @@ int Gracz_vs_SI(Ekran &E, Arena &A, AI& AI) {
 						Wektor_Przesuniecia[0] = AI.TabKoniec[2] - AI.TabKoniec[0];
 						Wektor_Przesuniecia[1] = AI.TabKoniec[3] - AI.TabKoniec[1];
 
-						/* korekta wektoru przesuniecia */
+						/* korekta wektoru przesuniecia */					
 						{
 							if (Wektor_Przesuniecia[0] < 0 && Wektor_Przesuniecia[1] < 0) {
 								korekta[0] = -1;
@@ -201,8 +201,7 @@ int Gracz_vs_SI(Ekran &E, Arena &A, AI& AI) {
 								korekta[1] = -1;
 							}
 						}
-
-					} while (zbity > 0 && A.Czy_Mozliwe_Bicie(AI.TabKoniec[0] + Wektor_Przesuniecia[0]+korekta[0], AI.TabKoniec[1] + Wektor_Przesuniecia[1]+korekta[1]));
+					} while (zbity > 0 && A.Czy_Mozliwe_Bicie(AI.TabKoniec[2] + korekta[0], AI.TabKoniec[3] + korekta[1]));
 
 					gracz--;
 
@@ -255,7 +254,6 @@ int Gracz_vs_SI(Ekran &E, Arena &A, AI& AI) {
 								oknoAplikacji.display();
 							}
 						}
-
 						break;
 					}
 				}
@@ -366,7 +364,7 @@ int Gracz_vs_Gracz(Ekran &E, Arena &A) {
 
 				pom[1] = ((int)yk - 65) - ((int)y - 65);
 				pom[0] = xk - x;
-
+				//if(A.Czy_Brak_Ruchu()  )
 				int wynik = A.Przesun_Pionek(x, (int)y - 65, xk, (int)yk - 65, gracz, E); 
 
 				/* jesli mozliwy ruch */
@@ -495,7 +493,6 @@ int Gracz_vs_Gracz(Ekran &E, Arena &A) {
 									return 1;
 								}
 							}
-
 							oknoAplikacji.draw(E.Sprite_lannister);
 							oknoAplikacji.display();
 						}
@@ -652,10 +649,11 @@ int main() {
 			cout << " ******************* OGOLNE ZALOZENIE I ZASADY *******************" << endl;
 			cout << " -pionki nie moga ruszac sie do tylu chyba ze maja mozliwe bicie" << endl;
 			cout << " -nie ma przymusowego bicia" << endl;
-			cout << " -mozna wyknoac wielokrotne bicie" << endl;
-			cout << " -damka moze poruszac sie o dowolna ilosc pol do napotkania wroga (po jego zbiciu mozliwe jest wielokrotne bicie\n w odl max 1 pola" << endl;
+			cout << " -mozna wykonac wielokrotne bicie" << endl;
+			cout << " -damka moze poruszac sie o dowolna ilosc pol do napotkania wroga (po jego zbiciu mozliwe jest wielokrotne bicie\n w odl max 1 pola)" << endl;
 			cout << " -aby wykonac wielokrotne bicie nalezy wybrac pionka ktory bedzie bil a nastepnie pionka do zbicia.\n Po zbiciu znowu nalezy wybrac pionka ktorym wykonywany byl ruch i zbic kolejnego" << endl;
 			cout << endl << "Nalezy pamietac ze gra jest ciagle w wersji alfa i moga wystepowac pewne bledy i niedopracowania" << endl;
+			system("pause");
 		}
 	}
 

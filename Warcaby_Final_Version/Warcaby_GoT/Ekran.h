@@ -71,7 +71,7 @@ void Ekran::Tworz_Plansze()
 	DamkaC.loadFromFile("image/stark_D.png");
 }
 
-/* Wczytuje i umieszcza na planszy biale i czarne pionki */
+/* Wczytuje i umieszcza na planszy pionki */
 void Ekran::Ulozenie_Pionkow()
 {
 	Pionek.loadFromFile("image/lannister.png");
