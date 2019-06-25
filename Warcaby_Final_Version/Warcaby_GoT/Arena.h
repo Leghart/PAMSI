@@ -6,9 +6,11 @@
 constexpr auto ROZ = 8;
 using namespace std;
 
+
 class Arena{
 public:
 	char **tablica;
+	char tablica_jedno[ROZ*ROZ];
 	string **znaki;
 	int **Tab_Rozx;
 	int **Tab_Rozy;
@@ -18,6 +20,7 @@ public:
 		"Pc12","Pc11","Pc10","Pc9","Pc4","Pc3","Pc2","Pc1","Pc8","Pc7","Pc6","Pc5" };
 
 	Arena();
+	Arena(int);
 	~Arena();
 
 	// logika + wersja terminal
@@ -35,6 +38,9 @@ public:
 	bool Czy_Ruch_W_Tyl(int[], char);
 	bool Czy_Droga_Wolna(int, int, int, int);
 	bool Czy_Brak_Ruchu(int,int,int);
+	void Wczytaj_dane();
+	void Wyslij_dane();
+	void Wpisz_dane(char[]);
 
 	// wersja SFML
 	void Animacja(int, int, int, int, Ekran&);
@@ -108,12 +114,49 @@ Arena::Arena(){
 	}
 }
 
+/* testowe */
+Arena::Arena(int k) {
+	tablica = new char *[ROZ];
+	znaki = new string *[ROZ];
+	Tab_Rozx = new int *[ROZ];
+	Tab_Rozy = new int *[ROZ];
+
+	for (int i = 0; i < ROZ; i++) {
+		tablica[i] = new char[ROZ];
+		znaki[i] = new string[ROZ];
+		Tab_Rozx[i] = new int[ROZ];
+		Tab_Rozy[i] = new int[ROZ];
+	}
+
+	//zerowanie
+	for (int i = 0; i < ROZ; i++) {
+		for (int j = 0; j < ROZ; j++) {
+			tablica[i][j] = ' ';
+			znaki[i][j] = " ";
+		}
+	}
+
+	tablica[rand() % k][rand() % k] = 'x';
+	tablica[rand() % k][rand() % k] = 'o';
+	tablica[rand() % k][rand() % k] = 'x';
+	tablica[rand() % k][rand() % k] = 'o';
+	tablica[rand() % k][rand() % k] = 'x';
+	tablica[rand() % k][rand() % k] = 'o';
+	tablica[rand() % k][rand() % k] = 'x';
+	tablica[rand() % k][rand() % k] = 'o';
+}
+
 /* zwolnienie pamieci */
 Arena::~Arena(){
 	for (int i = 0; i < ROZ; i++){
 		delete[] tablica[i];
+		delete[] znaki[i];
+		delete[] Tab_Rozx[i];
+		delete[] Tab_Rozy[i];
 	}
-
+	delete[] znaki;
+	delete[] Tab_Rozx;
+	delete[] Tab_Rozy;
 	delete[] tablica;
 }
 
@@ -1014,6 +1057,31 @@ bool Arena::Czy_Brak_Ruchu(int xp, int yp, int gracz){
 	}
 	return tmp;
 }
+
+/* Wpisz dane do tablicy_jedno z zewnatrz */
+void Arena::Wpisz_dane(char tab[]) {
+	for (int i = 0; i < ROZ*ROZ; i++)
+		tablica_jedno[i] = tab[i];
+}
+
+/* wczytuje dane z tab jednowymiarowej do tablicy pinow */
+void Arena::Wczytaj_dane() {
+	int z = 0;
+	for (int i = 0; i < ROZ; i++)
+		for (int j = 0; j < ROZ; j++)
+			tablica[i][j] = tablica_jedno[z++];
+}
+
+/* konwertuje dane na postac jednowymiarowa*/
+void Arena::Wyslij_dane() {
+	int z = 0;
+	for (int i = 0; i < ROZ; i++)
+		for (int j = 0; j < ROZ; j++)
+			tablica_jedno[z++] = tablica[i][j];
+}
+
+
+
 
 #endif // !ARENA_H
 

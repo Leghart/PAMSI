@@ -43,7 +43,6 @@ for (int i = 0; i < ROZ; i++){
 		wag--;
 	}
 }
-
 for (int i = 0; i < ROZ; i++)
 	for (int j = 0; j < ROZ; j++)
 		tablicaWagRuchow[i][j] += i;

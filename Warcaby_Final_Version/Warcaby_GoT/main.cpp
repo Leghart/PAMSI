@@ -11,9 +11,14 @@
 using namespace std;
 
 /* PROTOTYPY: Zamiana wspolrzednych na plaszny na wygodnyy uklad odniesienia i menu*/
+char dane_j[ROZ*ROZ];
+char dane_d[ROZ][ROZ];
 int ZwrocX(int);
 char ZwrocY(int);
 int Menu();
+void jnad(char*);
+void dnaj(char**);
+
 
 /* Tryb gry umozliwiacjacy pojedynek ze sztuczna inteligencja */
 int Gracz_vs_SI(Ekran &E, Arena &A, AI& AI) {
@@ -545,6 +550,11 @@ int Gracz_vs_Gracz(Ekran &E, Arena &A) {
 	return 0;
 }
 
+/* Tryb gry multiplayer */
+int Multi() {
+	return -1;
+}
+
 /* Menu sluzoce wyborowi trybow gry i zalaczajace muzyke*/
 int Menu() {
 	Ekran E;
@@ -608,6 +618,10 @@ int Menu() {
 						wybor = 2;
 						MenuGlowne.close();
 					}
+					if (xpom < 428 && xpom>267 && ypom < 624 && ypom>569) {
+						wybor = 3;
+						MenuGlowne.close();
+					}
 					if (xpom < 156 && xpom>39 && ypom < 755 && ypom>709) {
 						MenuGlowne.close();
 						return 0;
@@ -626,44 +640,125 @@ int Menu() {
 	case 2:
 		return Gracz_vs_SI(E, A, AI);
 		break;
+	case 3:
+		cout << "Prace w toku" << endl;
+		system("pause");
+		break;
 	default:
 		break;
 	}
 	return 0;
 }
 
+/* Instrukcja obslugi */
+void Instruckja() {
+	string znak;
+
+	cout << "!!! Wszytskie utwory muzyczne i grafiki zostaly zaimplementowane na uzytek wlasny a\n nie w celach komercyjnych !!!" << endl;
+	cout << "Czy chcesz wyswietlic instukcje obslugi? (y):";
+	cin >> znak;
+	if (znak == "y" || znak == "Y") {
+		cout << endl << "************ NSTRUKCJA GRY W WARCABY ****************" << endl;
+		cout << " Ta wersja gry dziala nastepujaco: aby ruszac sie pionkami nalezy wybrac pionka do ruchu LPM\n a nastepnie wybrac pole w ktore ma sie poruszyc PPM." << endl;
+		cout << " To samo tyczy sie bicia wroga." << endl;
+		cout << " ******************* OGOLNE ZALOZENIE I ZASADY *******************" << endl;
+		cout << " -pionki nie moga ruszac sie do tylu chyba ze maja mozliwe bicie" << endl;
+		cout << " -nie ma przymusowego bicia" << endl;
+		cout << " -mozna wykonac wielokrotne bicie" << endl;
+		cout << " -damka moze poruszac sie o dowolna ilosc pol do napotkania wroga (po jego zbiciu mozliwe jest wielokrotne bicie\n w odl max 1 pola)" << endl;
+		cout << " -aby wykonac wielokrotne bicie nalezy wybrac pionka ktory bedzie bil a nastepnie pionka do zbicia.\n Po zbiciu znowu nalezy wybrac pionka ktorym wykonywany byl ruch i zbic kolejnego" << endl;
+		cout << endl << "Nalezy pamietac ze gra jest ciagle w wersji alfa i moga wystepowac pewne bledy i niedopracowania" << endl;
+		system("pause");
+	}
+}
 
 /* wszystkie 1 zwracane przez funkcje kontunuuja prace petli
 	a 0 zatrzymuja jej prace	*/
 int main() {
-	string znak;
-	//instrukcja obslugi
-	{
-		cout << "!!! Wszytskie utwory muzyczne i grafiki zostaly zaimplementowane na uzytek wlasny a\n nie w celach komercyjnych !!!" << endl;
-		cout << "Czy chcesz wyswietlic instukcje obslugi? (y):";
-		cin >> znak;
-		if (znak == "y" || znak == "Y") {
-			cout << endl << "************ NSTRUKCJA GRY W WARCABY ****************" << endl;
-			cout << " Ta wersja gry dziala nastepujaco: aby ruszac sie pionkami nalezy wybrac pionka do ruchu LPM\n a nastepnie wybrac pole w ktore ma sie poruszyc PPM." << endl;
-			cout << " To samo tyczy sie bicia wroga." << endl;
-			cout << " ******************* OGOLNE ZALOZENIE I ZASADY *******************" << endl;
-			cout << " -pionki nie moga ruszac sie do tylu chyba ze maja mozliwe bicie" << endl;
-			cout << " -nie ma przymusowego bicia" << endl;
-			cout << " -mozna wykonac wielokrotne bicie" << endl;
-			cout << " -damka moze poruszac sie o dowolna ilosc pol do napotkania wroga (po jego zbiciu mozliwe jest wielokrotne bicie\n w odl max 1 pola)" << endl;
-			cout << " -aby wykonac wielokrotne bicie nalezy wybrac pionka ktory bedzie bil a nastepnie pionka do zbicia.\n Po zbiciu znowu nalezy wybrac pionka ktorym wykonywany byl ruch i zbic kolejnego" << endl;
-			cout << endl << "Nalezy pamietac ze gra jest ciagle w wersji alfa i moga wystepowac pewne bledy i niedopracowania" << endl;
-			system("pause");
+	Arena A(7);
+	cout << "Oryginal A przed wyslaniem w postaci jednowym tab:" << endl;
+	A.Wyslij_dane();
+	for (int i = 0; i < 64; i++)
+		cout << A.tablica_jedno[i];
+
+	sf::IpAddress ip = sf::IpAddress::getLocalAddress();
+	sf::TcpSocket socket;
+	sf::TcpSocket socket_data;
+	char connectionType, mode;
+	unsigned int received; // do tej zmiennej zostanie zapisana iloœæ odebranych danych
+	char buffer[2000];
+	string text = "Jestes ";
+
+	char data[64];
+	char data1[64];
+	for (int i = 0; i < 64; i++)
+		data[i] = A.tablica_jedno[i];
+	cout << endl;
+
+	cout << "(s) dla serwera,(c) dla klienta: ";
+	cin >> connectionType;
+	if (connectionType == 's') {
+		sf::TcpListener listener;
+		listener.listen(2000);
+		listener.accept(socket);
+		text += "klientem";
+		mode = 's';
+	}
+	else if (connectionType == 'c') {
+		socket.connect(ip, 2000);
+		text += "serwerem";
+		mode = 'r';
+	}
+	int k = 0;
+	bool done = false;
+	while (!done) {
+		if (mode == 's') {
+			mode = 'r';
+			k++;
+			for (int i = 0; i < 64; i++)
+				cout << data[i];
+			cout << endl;
+			if (k < 50) {
+				data[k] = 'x';
+			}
+			if (k >= 50)
+				done = true;
+
+			if (socket.send(data, 64) != sf::Socket::Done) {
+				cerr << "Nie mo¿na wys³aæ danych!\n";
+				exit(1);
+			}
+
+		}
+		else if (mode == 'r') {
+			if (socket.receive(data1, 64, received) != sf::Socket::Done) {
+				cerr << "Nie mo¿na odebraæ danych!\n";
+				exit(1);
+			}
+			mode = 's';
+		}
+		else{
+			cout << "Odebrano: " << received << " danych" << endl;
+			mode = 's';
 		}
 	}
+	cout << "A po zmianie:" << endl;
+	A.Wpisz_dane(data1);
+	for (int i = 0; i < 64; i++)
+		cout << A.tablica_jedno[i];
 
-	//petla gry
+	system("pause");
+	return 0;
+}
+
+	/*
+	Instruckja();
 	int start = 1;
 	while (start != 0) {
 		start = Menu();
 	}
-	return 0;
-}
+	*/
+
 
 /* zamienia wspolrzedne na planszy na numer kolumny */
 char ZwrocY(int y)
@@ -691,3 +786,73 @@ int ZwrocX(int x)
 	else if (x > 555 && x < 633) return 6;
 	else if (x > 633 && x < 710) return 7;
 }
+
+
+/* zamienia tablice dwuwymairowa na jednowymiarowoa */
+void dnaj(char** tab) {
+	int z = 0;
+	for (int i = 0; i < ROZ; i++)
+		for (int j = 0; j < ROZ; j++)
+			dane_j[z++] = tab[i][j];
+}
+
+/* zamienia tablice jednowymairowa na dwuwymiarowa */
+void jnad(char* tab) {
+	int z = 0;
+	for (int i = 0; i < ROZ; i++)
+		for (int j = 0; j < ROZ; j++)
+			dane_d[i][j] = tab[z++];
+}
+/*
+	cout << "TEST" << endl;
+	cout  << "tablica jend:" << endl;
+	for (int i = 0; i < 64; i++)
+		cout << tab[i];
+	cout << endl;
+	cout << "tablica dwu:" << endl;
+	for (int i = 0; i < ROZ; i++)
+		for (int j = 0; j < ROZ; j++)
+			cout << dane_d[i][j];
+*/
+
+/*	cout << "(s) dla serwera,(c) dla klienta: ";
+	cin >> connectionType;
+	if (connectionType == 's') {
+		sf::TcpListener listener;
+		//listener.listen(2000);
+		listener.listen(64);
+		listener.accept(socket);
+		text += "klientem";
+		mode = 's';
+	}
+	else if (connectionType == 'c') {
+		//socket.connect(ip, 2000);
+		socket.connect(ip, 64);
+		text += "serwerem";
+		mode = 'r';
+	}
+	socket.send(text.c_str(), text.length() + 1);
+
+	socket.receive(buffer, sizeof(buffer), received);
+	cout << buffer << endl;
+
+	bool done = false;
+	while (!done) {
+		if (mode == 's') {
+			//getline(cin, text);
+			getline(cin, text);
+			socket.send(text.c_str(), text.length() + 1);
+			mode = 'r';
+		}
+		else if (mode == 'r') {
+			socket.receive(buffer, sizeof(buffer), received);
+			if (received > 0) {
+				cout << "Odebrano: " << buffer << endl;
+				mode = 's';
+			}
+		}
+	}
+
+	
+	system("pause");
+	return 0;*/
